@@ -83,6 +83,7 @@ path = '../../Databank/Data/Simulations/'
 db_data = databank(path)
 systems = db_data.get_systems()
 
+time_diff = 500
 
 for system in systems:
 
@@ -99,7 +100,7 @@ for system in systems:
         
     flipflop_file = DATAdir + 'flipflop.txt' #change later
     with open(flipflop_file, 'w') as f:
-         f.write('# frame_i frame_i+1  molecule\n')
+         f.write('# time n - ' + str(time_diff) + ' (ps)    time n (ps)     molecule\n')
                         
     f.close()                                  
                 
@@ -132,7 +133,7 @@ for system in systems:
     
     start = int(EQtime*dt)
     flipflops = 0
-    time_diff = 500
+    
     skip = int(time_diff / dt)
                 
     frames_lipids = []
@@ -159,6 +160,7 @@ for system in systems:
         #every 500th frame for checking flip flops
         for ts in u.trajectory[start:end:skip]:
             print('frame ' + str(ts.frame))
+            time = u.trajectory.time
             
             R_m = membraneCentreOfMass(u, system)
             
@@ -178,7 +180,7 @@ for system in systems:
                     if l_leaflet_fr[i] != previous_leaflet[i]:
                         print("FLIP FLOP")
                         flipflops += 1
-                        frames_lipids.append([str(ts.frame - skip) + ' ' + str(ts.frame) + '   ' + lipid])
+                        frames_lipids.append([str(time - time_diff) + ' ' + str(time) + '   ' + lipid])
                                     
                         
                                     
