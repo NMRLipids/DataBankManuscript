@@ -79,7 +79,7 @@ def membraneCentreOfMass(universe, readme):
     return R_membrane
     
 
-path = '../../Databank/Data/Simulations/006/559/006559139e730fc43b244726992145c2f37a1461/3c99810c45a83b4ba0e54a69fdea8817498a8930/'
+path = '../../Databank/Data/Simulations/'
 db_data = databank(path)
 systems = db_data.get_systems()
 
