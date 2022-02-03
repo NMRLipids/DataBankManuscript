@@ -1,0 +1,5 @@
+# time n - 500 (ps)    time n (ps)     molecule
+55500.0 56000.0   DPPC
+56500.0 57000.0   DPPC
+58500.0 59000.0   DPPC
+59000.0 59500.0   DPPC

@@ -1,0 +1,2 @@
+# time n - 500 (ps)    time n (ps)     molecule
+73500.0 74000.0   CHOL

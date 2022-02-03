@@ -159,7 +159,7 @@ for system in systems:
      
         #every 500th frame for checking flip flops
         for ts in u.trajectory[start:end:skip]:
-            print('frame ' + str(ts.frame))
+            # print('frame ' + str(ts.frame))
             time = u.trajectory.time
             
             R_m = membraneCentreOfMass(u, system)
