@@ -1,0 +1,3 @@
+# time n - 500 (ps)    time n (ps)     molecule
+445000.0 445500.0   DSPC
+445500.0 446000.0   DSPC
