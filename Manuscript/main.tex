@@ -89,9 +89,33 @@ The NMRlipids databank files contain all the essential information on the
 original data that enable wide range of applications.
 %and all essential information on simulations needed in further use and automatic analysis.
 
-
-
 Each simulation system is identified using the hash of original trajectory and topology file. The index files are stored in folder structure based on the identity codes of the simulations.
+
+
+\subsection{Quality evaluation}
+
+For quality evaluation, each simulation is connected to a experimental dataset is similar conditions. Currently experimental and simulation datasets are paired if molar concentrations of all molecules are within $\pm$5 percentage units, charged lipids have the same counterions, and temperature is within $\pm$2 degrees. If lipid to water ratio is above ??, the systems are considered fully hydrated. Otherwise also hydration level is considered.
+
+Quality of lipid conformational ensembles are evaluated against C-H bond order parameters from NMR experiments~\cite{ollila16}. As a first step, the quality of each order parameter is evaluated using the negative logarithm of probability to find the simulated order parameter within the experimental error bars
+\begin{equation}
+    S_q = -\log_{10}(P),    
+\end{equation}
+where the probability is calculated from the normal distribution
+\begin{equation}
+    P = \int_{S_{\rm exp}-\Delta S_{\rm exp}}^{S_{\rm exp}+
+    \Delta S_{\rm exp}}  \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2} {\rm d}x.
+\end{equation}
+$S_{\rm exp}$ and $\Delta S_{\rm exp}$ are experimental order parameter and its error, and $\mu$ and $\sigma$ are the mean order parameter and its standard deviation from simulations. The quality measure $S_q$ approaches to zero when probability for agreement between simulation and experimental results approach one, and increases when simulated and experimental values diverge.
+
+The quality of separate fragments in each lipid type within a simulation are then evaluated by averaging individual order parameter qualities over C-H bond belonging to that fragment and dividing this with the percentage of order parameters for which the quality is available within the fragment, $p$
+\begin{equation}
+    S_q^{\rm frag}[{\rm lipid}] = \frac{\langle S_q[{\rm lipid}]\rangle_{\rm frag}}{p_{\rm frag}[{\rm lipid}]},
+\end{equation}
+ where frag can be {\it sn}-1, {\it sn}-2, headgroup or total (all order parameters within a molecule). The overall quality of different fragments in a simulation are then defined as a molar fraction weighted average over different lipid components
+\begin{equation}
+    S_q^{\rm frag} = \sum_{\rm lipid} \chi_{\rm lipid} \langle S_q^{\rm frag}[{\rm lipid}]\rangle_{\rm lipid} ,
+\end{equation}
+where $\chi_{\rm lipid}$ is the molar fraction of a lipid in the bilayer.
 
 \subsection{Analysis of the data in databank}
 
