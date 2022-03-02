@@ -101,11 +101,11 @@ Quality of lipid conformational ensembles are evaluated against C-H bond order p
     S_q = -\log_{10}(P),    
 \end{equation}
 where the probability is calculated from the normal distribution
-\begin{equation}
+\begin{equation}\label{gaussian}
     P = \int_{S_{\rm exp}-\Delta S_{\rm exp}}^{S_{\rm exp}+
     \Delta S_{\rm exp}}  \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2} {\rm d}x.
 \end{equation}
-$S_{\rm exp}$ and $\Delta S_{\rm exp}$ are experimental order parameter and its error, and $\mu$ and $\sigma$ are the mean order parameter and its standard deviation from simulations. The quality measure $S_q$ approaches to zero when probability for agreement between simulation and experimental results approach one, and increases when simulated and experimental values diverge.
+$S_{\rm exp}$ and $\Delta S_{\rm exp}$ are experimental order parameter and its error, and $\mu$ and $\sigma$ are the mean order parameter and its standard deviation from simulations. The quality measure $S_q$ approaches to zero when probability for agreement between simulation and experimental results approach one, and increases when simulated and experimental values diverge. The accuracy of $\pm$0.02 is currently assumed for all experimental order parameters~\cite{ollila16}. Because phospholipids sample their conformational ensemble within nanosecond timescale~\cite{ferreira15}, all simulations in the databank would be sufficiently long to sample the realistic conformational phase of individual lipids. However, some force fields exhibit too slow dynamics which leads to large error bars in order parameter values~\cite{antila21a}. Because large error bars widen the gaussian distribution in Eq.~\ref{gaussian} thereby artificially increasing the probability to find the simulated value within experimental error bars, the order parameters with error bars larger than the experimental error 0.02 are not included in the quality evaluation.
 
 The quality of separate fragments in each lipid type within a simulation are then evaluated by averaging individual order parameter qualities over C-H bond belonging to that fragment and dividing this with the percentage of order parameters for which the quality is available within the fragment, $p$
 \begin{equation}
@@ -116,6 +116,18 @@ The quality of separate fragments in each lipid type within a simulation are the
     S_q^{\rm frag} = \sum_{\rm lipid} \chi_{\rm lipid} \langle S_q^{\rm frag}[{\rm lipid}]\rangle_{\rm lipid} ,
 \end{equation}
 where $\chi_{\rm lipid}$ is the molar fraction of a lipid in the bilayer.
+
+Qualities of form factors were evaluated with the same approach that was used in SIMtoEXP program~\cite{kucerka10}. Because experiments give form factors only in relative scale those were scaled to the simulation data with absolute scale using equation
+\begin{equation}
+    k_e = \frac{\sum_{i=1}^{N_q} \frac{|F_s(q_i)||F_e(q_i)|}{(\Delta F_e(q_i))^2}}{\sum_{i=1}^{N_q} \frac{|F_e(q_i)|^2}{(\Delta F_e(q_i))^2}}.
+\end{equation}
+The quality of each form factor was then calculated from the equation
+\begin{equation}
+    \chi^2 = \frac{\sqrt{\sum_{i=1}^{N_q}(|F_s(q_i)|-k_e|F_e(q_i)|)^2/(\Delta F_e(q_i))^2}}{\sqrt{N_q-1}},
+\end{equation}
+where $F_s$ and $F_e$ are form factors from a simulation and experiment, respectively, and summation goes over the experimentally available $N_q$ points. 
+
+
 
 \subsection{Analysis of the data in databank}
 
@@ -266,7 +278,7 @@ The date of running the script is saved to the README.yaml file.
 
 
 
-\bibliography{sample}
+\bibliography{refs.bib}
 
 %\noindent LaTeX formats citations and references automatically using the bibliography records in your .bib file, which you can edit via the project menu. Use the cite command for an inline citation, e.g.  \cite{Hao:gidmaps:2014}.
 
