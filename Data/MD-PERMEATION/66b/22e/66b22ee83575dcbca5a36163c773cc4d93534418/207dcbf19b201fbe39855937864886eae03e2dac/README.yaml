@@ -1,0 +1,51 @@
+AUTHORS_CONTACT: Martinez-Seara, Hector; Javanainen, Matti; Rissanen, Sami; Lolicato,
+  Fabio
+FF_DATE: null
+SYSTEM: 512DPPC_20480SOL_55SOD_55CLA_320K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 320.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 128110
+EXPERIMENT:
+  ORDERPARAMETER:
+    DPPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: CHARMM-GUI v1.6
+COMPOSITION:
+  DPPC:
+    NAME: DPPC
+    COUNT:
+    - 256
+    - 256
+    MAPPING: mappingDPPCcharmm.txt
+  SOD:
+    NAME: NA
+    COUNT: 55
+    MAPPING: mappingNA.txt
+  SOL:
+    NAME: SOL
+    COUNT: 20480
+    MAPPING: mappingSPCwater.txt
+  CLA:
+    NAME: CL
+    COUNT: 55
+    MAPPING: mappingCL.txt
+TIMELEFTOUT: 0
+CPT:
+- - DPPC_512_NaCl_150mM_320K_md.cpt
+TRJLENGTH: 300100.0
+TRAJECTORY_SIZE: 1438008584
+SOFTWARE_VERSION: 5.0.4
+FF: CHARMM36
+TOP:
+- - DPPC_512_NaCl_150mM_320K_md.top
+PREEQTIME: 400
+DOI: 10.5281/zenodo.16258
+DATEOFRUNNING: 05/10/2021
+TPR:
+- - DPPC_512_NaCl_150mM_320K_md.tpr
+TRJ:
+- - DPPC_512_NaCl_150mM_320K_md_part1.xtc
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

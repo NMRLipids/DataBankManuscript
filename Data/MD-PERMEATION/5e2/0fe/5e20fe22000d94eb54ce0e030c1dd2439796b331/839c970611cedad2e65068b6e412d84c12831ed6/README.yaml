@@ -1,0 +1,46 @@
+FF_DATE: ?/?/2020
+TYPEOFSYSTEM: lipid bilayer
+SYSTEM: POPC:POPG(1:1)_T298K
+TEMPERATURE: 298.0
+NUMBER_OF_ATOMS: 128895
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPG: {}
+    POPC:
+      10.1002/j.1460-2075.1987.tb02595.x: 10.1002/j.1460-2075.1987.tb02595.x/6
+  FORMFACTOR: {}
+FF_SOURCE: NMRlipidsIV
+COMPOSITION:
+  POPG:
+    NAME: PGR
+    COUNT:
+    - 76
+    - 74
+    MAPPING: mappingPOPGlipid17ecc.txt
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 75
+    - 75
+    MAPPING: mappingPOPClipid17ecc_POPCres.txt
+  SOL:
+    NAME: SOL
+    COUNT: 29865
+    MAPPING: mappingSPCwater.txt
+  SOD:
+    NAME: NA
+    COUNT: 150
+    MAPPING: mappingSODecc.txt
+TIMELEFTOUT: 15
+TRJLENGTH: 347500.0
+DATEOFRUNNING: 05/10/2021
+FF: lipid17ecc
+SOFTWARE: gromacs
+PREEQTIME: 0
+DOI: 10.5281/zenodo.3859339
+TRAJECTORY_SIZE: 8278576984
+TPR:
+- - topol.tpr
+TRJ:
+- - traj.xtc
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

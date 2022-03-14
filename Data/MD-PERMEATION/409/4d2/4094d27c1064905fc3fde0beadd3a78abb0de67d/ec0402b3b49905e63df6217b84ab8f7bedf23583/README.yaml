@@ -1,0 +1,51 @@
+AUTHORS_CONTACT: Matti Javanainen
+FF_DATE: null
+SYSTEM: 200DOPC_10000SOL_23SOD_23CLA
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 310.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 57646
+EXPERIMENT:
+  ORDERPARAMETER:
+    DOPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: CHARMM-GUI v1.7
+COMPOSITION:
+  CLA:
+    NAME: CLA
+    COUNT: 23
+    MAPPING: mappingCLA.txt
+  SOL:
+    NAME: TIP3
+    COUNT: 10000
+    MAPPING: mappingTIP3PCHARMMgui.txt
+  DOPC:
+    NAME: DOPC
+    COUNT:
+    - 100
+    - 100
+    MAPPING: mappingDOPCcharmm.txt
+  SOD:
+    NAME: SOD
+    COUNT: 23
+    MAPPING: mappingSOD.txt
+TIMELEFTOUT: 0
+CPT:
+- - dopc.cpt
+TRJLENGTH: 500100.0
+TRAJECTORY_SIZE: 1062313368
+SOFTWARE_VERSION: 2019
+FF: CHARMM36
+TOP:
+- - dopc.top
+PREEQTIME: 0
+DOI: 10.5281/zenodo.3592499
+DATEOFRUNNING: 01/10/2021
+TPR:
+- - dopc.tpr
+TRJ:
+- - dopc.xtc
+LOG:
+- - dopc.log
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/
