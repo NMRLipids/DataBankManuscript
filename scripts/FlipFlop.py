@@ -20,6 +20,15 @@ import MDAnalysis as mda
 sys.path.insert(1, '../../Databank/Scripts/BuildDatabank/')
 from databankLibrary import download_link, lipids_dict, databank
 
+def loadMappingFile(path_to_mapping_file):
+    # load mapping file into a dictionary
+    mapping_dict = {}
+    with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+path_to_mapping_file, "r") as yaml_file:
+        mapping_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
+    yaml_file.close()
+    
+    return mapping_dict
+
 def getLipids(readme):
         lipids = []
         for key in lipids_dict.keys():
@@ -33,10 +42,10 @@ def getLipids(readme):
         
 def getAtoms(readme, lipid):
     atoms = ""
-    m_file = readme['COMPOSITION'][lipid]['MAPPING']
-    with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+m_file,"r") as f:
-        for line in f:
-                atoms = atoms + ' ' + line.split()[1]
+    path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
+    mapping_dict = loadMappingFile(path_to_mapping_file)
+    for key in mapping_dict:
+        atoms = atoms + ' ' + mapping_dict[key]['ATOMNAME']
   
     return atoms
 
@@ -78,12 +87,28 @@ def membraneCentreOfMass(universe, readme):
   #  print(R_membrane)
     return R_membrane
     
+def headgroupAtoms(readme,lipid):
+    mapping_file = loadMappingFile(readme['COMPOSITION'][lipid]['MAPPING'])
+    #returns atom names labeled as belonging to headgroup in the mapping file
+    headgroup = ""
+    for key in mapping_file:
+        if mapping_file[key]['FRAGMENT'] == 'headgroup':
+            headgroup = headgroup + " " + mapping_file[key]['ATOMNAME']
+            
+    #if names in structure file contain ' characters add escape sign
+    if "\'" in headgroup:
+        headgroup = headgroup.replace("'","\'")
+    
+    return headgroup
+    
 
-path = '../../Databank/Data/Simulations/'
+path = '../../Databank/Data/Simulations/006/559/006559139e730fc43b244726992145c2f37a1461/3c99810c45a83b4ba0e54a69fdea8817498a8930/'
 db_data = databank(path)
 systems = db_data.get_systems()
 
-time_diff = 500
+
+#compare frames every 500 ps
+time_diff = 500 
 
 for system in systems:
 
@@ -98,11 +123,8 @@ for system in systems:
         os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0] + '/' + indexingPath.split('/')[1] + '/' + indexingPath.split('/')[2])
         os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0] + '/' + indexingPath.split('/')[1] + '/' + indexingPath.split('/')[2] + '/' + indexingPath.split('/')[3]) 
         
-    flipflop_file = DATAdir + 'flipflop.txt' #change later
-    with open(flipflop_file, 'w') as f:
-         f.write('# time n - ' + str(time_diff) + ' (ps)    time n (ps)     molecule\n')
-                        
-    f.close()                                  
+    flipflop_file = DATAdir + 'flipflop.dat' #change later
+                                      
                 
     doi = system['DOI']
     trj=system['TRJ'][0][0]
@@ -126,73 +148,108 @@ for system in systems:
     u = mda.Universe(tpr_name,xtcwhole)
                 
     lipids = getLipids(system)
-    print(lipids)            
+   # print(lipids)            
     end = len(u.trajectory)
                 
-    dt = u.trajectory.dt
+    dt = int(u.trajectory.dt)
     
-    start = int(EQtime*dt)
+    start = int(EQtime / dt)
     flipflops = 0
     
+    # compare frames i and i - 500 ps
+    # if saving frequency is greater than 500 ps then there's no need to skip
     skip = int(time_diff / dt)
+    if time_diff < dt:
+        skip = 1
+    
+ #   print("EQtime " + str(EQtime))
+ #   print("start " + str(start))
+ #   print("dt " + str(dt))
+ #   print("end " + str(end))
+ #   print("skip " + str(skip))
+ #   print("time_diff  " + str(time_diff))
                 
     frames_lipids = []
                 
     for lipid in lipids:
+        #save state of the leaflet in previous frames
         previous_leaflet = []
         lipid_atoms = getAtoms(system, lipid)
         
-        #if names in structure file contain ' characters add escape sign 
-        if "\'" in lipid_atoms:
-            lipid_atoms = lipid_atoms.replace("'","\'")
-          #  print(lipid_atoms)
-            
+        headgroup_atoms = headgroupAtoms(system,lipid)
+
         lipid_resname = system['COMPOSITION'][lipid]['NAME']
 
-        lipid_atoms_selection = u.select_atoms('resname ' + lipid_resname + ' and name' + lipid_atoms).split('residue')
-               
+        headgroup_atoms_selection = u.select_atoms('resname ' + lipid_resname + ' and name' + headgroup_atoms).split('residue')  
+     
         
-      #  if lipid == 'CHOL':
-        print(lipid + "  " +lipid_resname)
+     #   print(lipid + "  " +lipid_resname)
+        
      #   print(lipid_atoms)
      #   print(lipid_atoms_selection)
      
         #every 500th frame for checking flip flops
+        
         for ts in u.trajectory[start:end:skip]:
-            # print('frame ' + str(ts.frame))
+          #  print("frame " + str(ts.frame))
             time = u.trajectory.time
             
             R_m = membraneCentreOfMass(u, system)
             
             l_leaflet_fr = []
-                        
-            for l in lipid_atoms_selection:  
-                l_z = l.center_of_mass()[2]
-                if l_z < R_m:
-                    l_leaflet_fr.append('l1') #in leaflet 1
-                if l_z > R_m:
-                    l_leaflet_fr.append('l2') #in leaflet 2
+            
+            for i, hg in enumerate(headgroup_atoms_selection):   #!!!!
+                hg_z = hg.center_of_mass()[2]
+                hg_resid = i
+                if hg_z < R_m:
+                    l_leaflet_fr.append([hg_resid, 'l1']) #in leaflet 1
+                if hg_z > R_m:
+                    l_leaflet_fr.append([hg_resid,'l2']) #in leaflet 2       
+
                                
-                        
-                 #check if lipid has changed leaflet between frames
-            if ts.frame != 0:
-                for i in range(0,len(l_leaflet_fr)):
-                    if l_leaflet_fr[i] != previous_leaflet[i]:
-                        print("FLIP FLOP")
+           # print("l_leaflet_fr")
+           # print(l_leaflet_fr)
+            
+            #check if lipid has changed leaflet between frames
+            if ts.frame != start and ts.frame != start + skip and ts.frame != start + 2*skip: # first two frames
+             #   print(previous_leaflet)
+                for j in range(0,len(l_leaflet_fr)-1):
+                
+                    index_1 = int(ts.frame/(skip)-start)-1 
+                    index_2 = int(ts.frame/(skip)-start)-2 
+                    
+                   # print(previous_leaflet[index_1])
+                   # print(previous_leaflet[index_2])
+                    
+                    
+                    # is lipid location in current frame different from the lipid location in the two previous frames  
+                    if l_leaflet_fr[j][0] != previous_leaflet[index_1][j][0] and l_leaflet_fr[j][1] == previous_leaflet[index_1][j][1] and l_leaflet_fr[j][0] != previous_leaflet[index_2][j][0] and l_leaflet_fr[j][1] == previous_leaflet[index_2][j][1]: # RESID SAME BUT LEAFLET IS DIFFERENT
+                        #print("FLIP FLOP")
                         flipflops += 1
-                        frames_lipids.append([str(time - time_diff) + ' ' + str(time) + '   ' + lipid])
+                        res_index = l_leaflet_fr[j][1]
+                        frames_lipids.append([str(time - time_diff) + ' ' + str(time) + '   ' + lipid + ' ' + str(res_index) + ' ' + str(ts.frame - skip) + ' ' + str(ts.frame)    ])
                                     
                         
                                     
                         
-            previous_leaflet = l_leaflet_fr.copy()    
+            previous_leaflet.append(l_leaflet_fr.copy())    
                             
-       # print(flipflops)                
+       # print(flipflops) 
+       
+    time_btwn_frames = time_diff
+    
+    if time_diff < dt:
+        time_btwn_frames = dt   
+       
+    with open(flipflop_file, 'w') as f:
+         f.write('# time n - ' + str(time_btwn_frames) + ' (ps)    time n (ps)     molecule\n')
+                        
+    f.close()               
                        
                             
     if flipflops > 0:
         print('number of flip flops in trajectory is ' + str(flipflops) + " in the simulation in directory " + indexingPath)
-       # flipflop_file = '../../Data/FlipFlop/flipflop.txt'     #+ indexingPath + '/flipflop.txt'
+
        # save frame nr and lipid name
         with open(flipflop_file, 'a') as f:
             for fr in frames_lipids:
