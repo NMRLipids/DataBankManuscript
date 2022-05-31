@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import os
 import sys
 import numpy as np
@@ -33,35 +27,7 @@ for key in molecules_dict:
     molecules.append(key)
 
     
-#colors = {'POPC' :'black','POPS':'red','POPE':'blue','POPG':'green'}
-
-#h = []
-
-
-#for subdir, dirs, files in os.walk(r'../../Data/Simulations/'):
-#    for filename in files:
-#        filepath = subdir + os.sep + filename
-#        if filepath.endswith("README.yaml"):
-#            READMEfilepath = subdir + '/README.yaml'
-#            with open(READMEfilepath) as yaml_file:
-
 for system in systems:
-
-#                readme = yaml.load(yaml_file, Loader=yaml.FullLoader)
-#                #for molname in molecules:
-#                doi = readme.get('DOI')
-#                trj = readme.get('TRJ')
-#                tpr = readme.get('TPR')
-#                trj_name = subdir + '/' + readme.get('TRJ')[0][0]
-#                tpr_name = subdir + '/' + readme.get('TPR')[0][0]
-#                gro_name = subdir + '/conf.gro'
-#                trj_url = download_link(doi, trj[0][0])
-#                tpr_url = download_link(doi, tpr[0][0])
-#                EQtime=float(readme.get('TIMELEFTOUT'))*1000
-
-#                densityFOLDERS = subdir.replace("Simulations","WATERdiffusion")    
-#                outfilename = str(densityFOLDERS) + '/WATERlateralMSD.xvg'
-
 
     # Extracting information from README.yaml file
     subdir = system['path']
