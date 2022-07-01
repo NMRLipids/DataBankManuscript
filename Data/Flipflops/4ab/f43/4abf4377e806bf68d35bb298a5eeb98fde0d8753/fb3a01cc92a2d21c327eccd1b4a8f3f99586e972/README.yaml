@@ -1,0 +1,58 @@
+AUTHORS_CONTACT: Javanainen, Matti
+FFCAL: ECC calcium
+SYSTEM: 22CHOL_200POPC_9000SOL_73CAL_146CLA_310K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 310.15
+PUBLICATION: null
+NUMBER_OF_ATOMS: 55647
+EXPERIMENT:
+  ORDERPARAMETER:
+    CHOL: {}
+    POPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: CHARMM-GUI v1.7, https://bitbucket.org/hseara/ions/ for ion parameters
+COMPOSITION:
+  CHOL:
+    NAME: CHL1
+    COUNT:
+    - 13
+    - 9
+    MAPPING: mappingCHOLESTEROLcharmm.yaml
+  SOL:
+    NAME: TIP3
+    COUNT: 9000
+    MAPPING: mappingTIP3PCHARMMgui.yaml
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 100
+    - 100
+    MAPPING: mappingPOPCcharmm.yaml
+  CAL:
+    NAME: CA
+    COUNT: 73
+    MAPPING: mappingCA.yaml
+  CLA:
+    NAME: CL
+    COUNT: 146
+    MAPPING: mappingCL.yaml
+TIMELEFTOUT: 0
+CPT: null
+TPR:
+- - md10.tpr
+SOFTWARE_VERSION: 5.0
+FF: CHARMM36 with incorrect multiplicity in dihedrals and ECC ions
+DATEOFRUNNING: 05/10/2021
+TOP:
+- - md10.top
+PREEQTIME: 0
+DOI: 10.5281/zenodo.259376
+TRAJECTORY_SIZE: 1649773560
+TRJLENGTH: 800100.0
+TRJ:
+- - md10.xtc
+FFCLA: ECC chloride
+FF_DATE: null
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

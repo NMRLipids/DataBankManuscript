@@ -1,3 +1,0 @@
-# time n - 500 (ps)    time n (ps)     molecule
-475000.0 475500.0   POPG
-475500.0 476000.0   POPG

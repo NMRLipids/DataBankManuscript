@@ -1,6 +1,0 @@
-# time n - 500 (ps)    time n (ps)     molecule
-0.0 500.0   CHOL
-76000.0 76500.0   CHOL
-77500.0 78000.0   CHOL
-149000.0 149500.0   CHOL
-149500.0 150000.0   CHOL

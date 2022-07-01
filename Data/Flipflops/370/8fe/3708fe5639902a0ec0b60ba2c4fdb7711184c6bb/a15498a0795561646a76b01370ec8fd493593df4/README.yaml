@@ -1,0 +1,52 @@
+DOI: 10.5281/zenodo.4750862
+SOFTWARE: gromacs
+TRJ:
+- - popcRUN2-4.trr
+TPR:
+- - popcRUN2.tpr
+PREEQTIME: 20
+TIMELEFTOUT: 0
+DIR_WRK: /usr/home/bort/Databank
+PUBLICATION: null
+AUTHORS_CONTACT: Ollila, Samuli
+SYSTEM: 72POPC_2085SOL_13CLA_13NA_303K
+SOFTWARE_VERSION: 4.5
+FF: CHARMM36
+FF_SOURCE: charmm2gmx.py
+FF_DATE: null
+CPT: null
+LOG: null
+TOP:
+- - popc.top
+COMPOSITION:
+  POPC:
+    NAME: POPC
+    MAPPING: mappingPOPCcharmm.yaml
+    COUNT:
+    - 36
+    - 36
+  SOL:
+    NAME: SOL
+    MAPPING: mappingSPCwater.yaml
+    COUNT: 2085
+  CLA:
+    NAME: CL
+    MAPPING: mappingCL.yaml
+    COUNT: 13
+  SOD:
+    NAME: NA
+    MAPPING: mappingNA.yaml
+    COUNT: 13
+TRAJECTORY_SIZE: 2294878416
+TRJLENGTH: 60010.0
+TEMPERATURE: 303.0
+NUMBER_OF_ATOMS: 15929
+DATEOFRUNNING: 21/12/2021
+TYPEOFSYSTEM: lipid bilayer
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPC: {}
+  FORMFACTOR: {}
+path: ../../Data/Simulations/370/8fe/3708fe5639902a0ec0b60ba2c4fdb7711184c6bb/a15498a0795561646a76b01370ec8fd493593df4/
+WARNINGS:
+  PBC: z-jumps

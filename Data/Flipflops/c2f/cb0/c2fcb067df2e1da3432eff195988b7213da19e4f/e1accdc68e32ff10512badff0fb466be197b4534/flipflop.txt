@@ -1,3 +1,0 @@
-# time n - 500 (ps)    time n (ps)     molecule
-104000.0 104500.0   POPC
-104500.0 105000.0   POPC

@@ -1,0 +1,50 @@
+AUTHORS_CONTACT: Melcr, Josef
+FF_DATE: null
+SYSTEM: 84POPC_4800SOL_36CHOL_303.84K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 303.15
+PUBLICATION: null
+NUMBER_OF_ATOMS: 28320
+EXPERIMENT:
+  ORDERPARAMETER:
+    CHOL: {}
+    POPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: MacKerell lab website (http://mackerell.umaryland.edu/charmm_ff.shtml)
+COMPOSITION:
+  CHOL:
+    NAME: CLOL
+    COUNT:
+    - 18
+    - 18
+    MAPPING: mappingCHOLESTEROLcharmm.yaml
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 42
+    - 42
+    MAPPING: mappingPOPCcharmm.yaml
+  SOL:
+    NAME: SOL
+    COUNT: 4800
+    MAPPING: mappingTIP3Pwater.yaml
+TIMELEFTOUT: 0
+CPT:
+- - state.cpt
+TRJLENGTH: 100010.0
+TRAJECTORY_SIZE: 1042927012
+SOFTWARE_VERSION: 5.1.2
+FF: CHARMM36
+TOP:
+- - topol.top
+PREEQTIME: 0
+DOI: 10.5281/zenodo.209362
+DATEOFRUNNING: 01/10/2021
+TPR:
+- - topol.tpr
+TRJ:
+- - traj_comp.xtc
+LOG:
+- - md.log
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

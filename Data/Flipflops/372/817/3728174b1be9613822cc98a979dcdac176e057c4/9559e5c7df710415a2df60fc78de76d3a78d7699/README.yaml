@@ -1,0 +1,47 @@
+AUTHORS_CONTACT: Papadopoulos, Chris and Fuchs, Patrick F.J.
+FF_DATE: null
+SYSTEM: 128POPC_128POPE_9102SOL_300K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 300.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 60458
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPC: {}
+    POPE: {}
+  FORMFACTOR: {}
+FF_SOURCE: CHARMM-GUI v1.7
+COMPOSITION:
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 64
+    - 64
+    MAPPING: mappingPOPCcharmm.yaml
+  SOL:
+    NAME: TIP3
+    COUNT: 9102
+    MAPPING: mappingTIP3PCHARMMgui.yaml
+  POPE:
+    NAME: POPE
+    COUNT:
+    - 64
+    - 64
+    MAPPING: mappingPOPEcharmm.yaml
+TIMELEFTOUT: 50
+CPT: null
+TRJLENGTH: 300100.0
+TRAJECTORY_SIZE: 668002264
+SOFTWARE_VERSION: null
+FF: CHARMM36
+TOP: null
+PREEQTIME: 0
+DOI: 10.5281/zenodo.1306821
+DATEOFRUNNING: 04/10/2021
+TPR:
+- - md.tpr
+TRJ:
+- - md_dt100_OK_centered.xtc
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

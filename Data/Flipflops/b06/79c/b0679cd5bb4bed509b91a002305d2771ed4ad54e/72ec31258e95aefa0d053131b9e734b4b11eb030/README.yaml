@@ -1,0 +1,43 @@
+AUTHORS_CONTACT: Samuli Ollila (samuli.ollila@helsinki.fi)
+FF_DATE: ?/?/????
+SYSTEM: POPC_T298K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 298.0
+UNITEDATOM_DICT:
+  POPC: Berger_PLA
+PUBLICATION: Ferreira et al. Phys. Chem. Chem. Phys., 2013,15, 1976-1989
+FFSOL: SPC
+NUMBER_OF_ATOMS: 28526
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPC:
+      10.1039/c2cp42738a: 10.1039/c2cp42738a/1
+  FORMFACTOR: unpublished/NMRlipidsIII/1
+FF_SOURCE: http://wcm.ucalgary.ca/tieleman/downloads
+COMPOSITION:
+  POPC:
+    NAME: PLA
+    COUNT:
+    - 64
+    - 64
+    MAPPING: mappingPOPCberger.yaml
+  SOL:
+    NAME: SOL
+    COUNT: 7290
+    MAPPING: mappingSPCwater.yaml
+TIMELEFTOUT: 0
+TRJLENGTH: 50010.0
+TRAJECTORY_SIZE: 3424404744
+SOFTWARE_VERSION: 4.5
+FF: Berger
+SOFTWARE: gromacs
+PREEQTIME: 270
+DOI: 10.5281/zenodo.4643875
+DATEOFRUNNING: 01/10/2021
+TPR:
+- - popc407.tpr
+TRJ:
+- - traj.trr
+TOP:
+- - topol.top
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

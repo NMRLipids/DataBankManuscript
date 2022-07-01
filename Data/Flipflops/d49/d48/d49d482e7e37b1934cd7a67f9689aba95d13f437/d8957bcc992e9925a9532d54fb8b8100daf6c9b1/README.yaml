@@ -1,0 +1,49 @@
+AUTHORS_CONTACT: Javanainen, Matti
+FF_DATE: null
+SYSTEM: 134CHOL_200POPC_15030SOL_310K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 310.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 81806
+EXPERIMENT:
+  ORDERPARAMETER:
+    CHOL: {}
+    POPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: CHARMM-GUI (http://www.charmm-gui.org)
+COMPOSITION:
+  CHOL:
+    NAME: CHL1
+    COUNT:
+    - 67
+    - 67
+    MAPPING: mappingCHOLESTEROLcharmm.yaml
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 100
+    - 100
+    MAPPING: mappingPOPCcharmm.yaml
+  SOL:
+    NAME: TIP3
+    COUNT: 15030
+    MAPPING: mappingTIP3PCHARMMgui.yaml
+TIMELEFTOUT: 0
+CPT:
+- - chol40_500ns.cpt
+TRJLENGTH: 500100.0
+TRAJECTORY_SIZE: 1521741868
+SOFTWARE_VERSION: null
+FF: CHARMM36
+TOP:
+- - chol40.top
+PREEQTIME: 0
+DOI: 10.5281/zenodo.3238157
+DATEOFRUNNING: 05/10/2021
+TPR:
+- - chol40.tpr
+TRJ:
+- - chol40_500ns.xtc
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

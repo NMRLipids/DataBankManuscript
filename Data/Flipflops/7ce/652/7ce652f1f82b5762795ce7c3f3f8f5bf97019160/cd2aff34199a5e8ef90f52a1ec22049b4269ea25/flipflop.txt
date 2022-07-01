@@ -1,3 +1,0 @@
-# time n - 500 (ps)    time n (ps)     molecule
-414500.0 415000.0   POPE
-415000.0 415500.0   POPE

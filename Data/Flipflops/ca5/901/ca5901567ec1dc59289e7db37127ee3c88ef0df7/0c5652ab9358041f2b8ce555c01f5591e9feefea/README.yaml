@@ -1,0 +1,53 @@
+FF_DATE: ?/?/2020
+TYPEOFSYSTEM: lipid bilayer
+SYSTEM: POPC:POPG(1:1)_T298K_1000mM_CaCl
+TEMPERATURE: 298.0
+NUMBER_OF_ATOMS: 130602
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPG: {}
+    POPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: NMRlipidsIV
+COMPOSITION:
+  POPG:
+    NAME: PGR
+    COUNT:
+    - 76
+    - 74
+    MAPPING: mappingPOPGlipid17ecc.yaml
+  CLA:
+    NAME: CL
+    COUNT: 1138
+    MAPPING: mappingCLAecc.yaml
+  CAL:
+    NAME: CA
+    COUNT: 569
+    MAPPING: mappingCALecc.yaml
+  SOD:
+    NAME: NA
+    COUNT: 150
+    MAPPING: mappingSODecc.yaml
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 75
+    - 75
+    MAPPING: mappingPOPClipid17ecc_POPCres.yaml
+  SOL:
+    NAME: SOL
+    COUNT: 29865
+    MAPPING: mappingSPCwater.yaml
+TIMELEFTOUT: 0
+TRJLENGTH: 400020.0
+DATEOFRUNNING: 05/10/2021
+FF: lipid17ecc
+SOFTWARE: gromacs
+PREEQTIME: 200
+DOI: 10.5281/zenodo.3862036
+TRAJECTORY_SIZE: 9709091500
+TPR:
+- - topol.tpr
+TRJ:
+- - traj.xtc
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/
