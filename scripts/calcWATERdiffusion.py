@@ -31,6 +31,19 @@ for system in systems:
 
     # Extracting information from README.yaml file
     subdir = system['path']
+    print('Analyzing in ' + subdir)
+    if 'gromacs' not in system['SOFTWARE']:
+        print('Only gromacs supported currently')
+        continue
+    if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
+        trjconvCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/trjconv'
+        makendxCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/make_ndx'
+        msdCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/g_msd'
+    else:
+        trjconvCOMMAND = 'gmx trjconv'
+        makendxCOMMAND = 'gmx make_ndx'
+        msdCOMMAND = 'gmx msd'
+
     READMEfilepath = subdir + '/README.yaml'
     doi = system['DOI']
     trj = system.get('TRJ')
@@ -57,7 +70,6 @@ for system in systems:
     os.system('mkdir -p ' + outputFOLDERS)
     os.system('cp ' + READMEfilepath + ' ' + outputFOLDERS)
     
-    print('Analyzing in ' + subdir)
                         
     #Download tpr and xtc files to same directory where dictionary and data are located
 
@@ -70,13 +82,17 @@ for system in systems:
 
     # Creating a gro file (this works only for Gromacs simulations)
     if (not os.path.isfile(gro_name)):
-        os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -dump 0 -o ' + gro_name)
+        os.system('echo System | ' + trjconvCOMMAND + ' -f ' + trj_name + ' -s ' + tpr_name + ' -dump 0 -o ' + gro_name)
 
     # Creating a trajectory with molecules whole  (this works only for Gromacs simulations) 
     # Note that this leaves out the equilibration time
-    xtcwhole=subdir + '/whole.xtc'
-    if (not os.path.isfile(xtcwhole)):
-        os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
+    xtccentered = subdir + '/centered.xtc'
+    if (os.path.isfile(xtccentered)):
+        xtcwhole = xtccentered
+    else:
+        xtcwhole=subdir + '/whole.xtc'
+        #if (not os.path.isfile(xtcwhole)):
+        os.system('echo System | ' + trjconvCOMMAND + ' -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
 
         
         
@@ -90,6 +106,6 @@ for system in systems:
     
     ndxSTR = 'keep 0 \na ' + waterO  + ' \nkeep 1 \nq'
     #print(ndxSTR)
-    os.system('echo "' + ndxSTR + '" | gmx make_ndx -f ' + tpr_name + ' -o ' + outputFOLDERS + '/SOLindex.ndx') 
-    os.system('gmx msd -f ' + xtcwhole + ' -s ' + tpr_name + ' -n  ' + outputFOLDERS + '/SOLindex.ndx -o ' + outfilename + ' -trestart 1000 -lateral z')
+    os.system('echo "' + ndxSTR + '" | ' + makendxCOMMAND +' -f ' + tpr_name + ' -o ' + outputFOLDERS + '/SOLindex.ndx') 
+    os.system(msdCOMMAND + ' -f ' + xtcwhole + ' -s ' + tpr_name + ' -n  ' + outputFOLDERS + '/SOLindex.ndx -o ' + outfilename + ' -trestart 1000 -lateral z')
                     

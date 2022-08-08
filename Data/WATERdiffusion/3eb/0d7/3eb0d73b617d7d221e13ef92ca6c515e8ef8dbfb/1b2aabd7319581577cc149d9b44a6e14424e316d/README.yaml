@@ -1,0 +1,41 @@
+AUTHORS_CONTACT: Ollila O. H. Samuli and Miettinen, Markus
+FF_DATE: null
+SYSTEM: 72POPC_1080SOL_303K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 303.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 12888
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPC: {}
+  FORMFACTOR: {}
+FF_SOURCE: null
+COMPOSITION:
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 36
+    - 36
+    MAPPING: mappingPOPCcharmm.txt
+  SOL:
+    NAME: SOL
+    COUNT: 1080
+    MAPPING: mappingSPCwater.txt
+TIMELEFTOUT: 0
+CPT: null
+TRJLENGTH: 40005.0
+TRAJECTORY_SIZE: 2475765432
+SOFTWARE_VERSION: 4.5
+FF: CHARMM36
+TOP:
+- - popcSH.top
+PREEQTIME: 19
+DOI: 10.5281/zenodo.4740115
+DATEOFRUNNING: 01/10/2021
+TPR:
+- - popcRUN3.tpr
+TRJ:
+- - popcRUN0-40ns.trr
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

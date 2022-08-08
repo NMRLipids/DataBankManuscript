@@ -1,0 +1,44 @@
+AUTHORS_CONTACT: Martinez-Seara, Hector
+FF_DATE: null
+SYSTEM: 72DPPC_2880SOL_325K_rmcomm_leaflets
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 325.0
+PUBLICATION: null
+NUMBER_OF_ATOMS: 18000
+EXPERIMENT:
+  ORDERPARAMETER:
+    DPPC: {}
+  FORMFACTOR:
+    10.1016/j.bbamem.2011.07.022: 10.1016/j.bbamem.2011.07.022/4
+FF_SOURCE: CHARMM-GUI v1.6
+COMPOSITION:
+  DPPC:
+    NAME: DPPC
+    COUNT:
+    - 36
+    - 36
+    MAPPING: mappingDPPCcharmm.txt
+  SOL:
+    NAME: SOL
+    COUNT: 2880
+    MAPPING: mappingTIP3Pwater.txt
+TIMELEFTOUT: 0
+CPT:
+- - DPPC_72_325K_rmcomm_leaflets_md.cpt
+TRJLENGTH: 500100.0
+TRAJECTORY_SIZE: 332189196
+SOFTWARE_VERSION: 5.0.4
+FF: CHARMM36 (center of mass removed independently for upper leaflet, lower leaflet
+  and water+ions)
+TOP:
+- - DPPC_72_325K_rmcomm_leaflets_md.top
+PREEQTIME: 0
+DOI: 10.5281/zenodo.1009607
+DATEOFRUNNING: 12/10/2021
+TPR:
+- - DPPC_72_325K_rmcomm_leaflets_md.tpr
+TRJ:
+- - DPPC_72_325K_rmcomm_leaflets_md.xtc
+LOG: null
+SOFTWARE: gromacs
+DIR_WRK: /usr/home/bort/Databank

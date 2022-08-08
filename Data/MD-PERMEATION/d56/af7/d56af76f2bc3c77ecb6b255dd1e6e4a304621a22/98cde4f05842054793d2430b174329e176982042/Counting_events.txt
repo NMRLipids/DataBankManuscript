@@ -1,2 +1,0 @@
- Permeation events over simulation time.
- t(ns) Number of events

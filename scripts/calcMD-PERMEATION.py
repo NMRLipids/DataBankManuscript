@@ -32,16 +32,22 @@ def getLipids(readme, molecules=lipids_dict.keys()):
     for key in readme['COMPOSITION'].keys():
         if key in molecules:
             m_file = readme['COMPOSITION'][key]['MAPPING']
-            with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+m_file,"r") as f:
-                for line in f:
-                    if len(line.split()) > 2 and "Individual atoms" not in line:
-                        if line.split()[2] not in lipids:
-                            lipids = lipids + line.split()[2] + ' or resname '
-                    elif "Individual atoms" in line:
-                        continue
-                    else:
-                        lipids = lipids + readme['COMPOSITION'][key]['NAME'] + ' or resname '
-                        break    
+            with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+m_file,"r") as yaml_file:
+                mapping_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
+                #for line in f:
+                #    if len(line.split()) > 2 and "Individual atoms" not in line:
+            for atom in mapping_dict:
+                print(mapping_dict[atom])
+                try:
+                    #        if line.split()[2] not in lipids:
+                    lipids = lipids + mapping_dict[atom]['RESIDUE'] + ' or resname '
+                except:
+                    lipids = lipids + readme['COMPOSITION'][key]['NAME'] + ' or resname '
+                    break
+                    #continue
+                    #else:
+
+                 
     lipids = lipids[:-12]
     print(lipids)
     return lipids
@@ -53,6 +59,10 @@ cwd = os.getcwd()
 for system in systems:
 
     # Extracting information from README.yaml file
+
+    if 'gromacs' not in system['SOFTWARE']:
+        continue
+    
     subdir = system['path']
     READMEfilepath = subdir + '/README.yaml'
     doi = system['DOI']
@@ -102,9 +112,10 @@ for system in systems:
 
     # Creating a trajectory with molecules whole  (this works only for Gromacs simulations) 
     # Note that this leaves out the equilibration time
-    xtcwhole=subdir + '/whole.xtc'
+    xtcwhole=subdir + '/centered.xtc'
     if (not os.path.isfile(xtcwhole)):
-        os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
+        continue
+        #os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
                         
     # Reads the name of water oxygen atom using the information in mapping file and README.yaml 
     water_mapping_file = '../../Databank/Scripts/BuildDatabank/mapping_files/' + system['COMPOSITION']['SOL']['MAPPING']
@@ -112,7 +123,7 @@ for system in systems:
 
     # Reads the phosphate atom name
     for lipid in system['COMPOSITION']:
-        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid):
+        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid) or ('DMTAP' in lipid):
             continue
         elif lipid in lipids_dict:
             lipid_mapping_file = '../../Databank/Scripts/BuildDatabank/mapping_files/' + system['COMPOSITION'][lipid]['MAPPING']
@@ -131,7 +142,12 @@ for system in systems:
     # Reading estimated center, simulation time, precision, and the number of the first water residue
 
     # center of mass
-    u = mda.Universe(gro_name,xtcwhole)
+    try:
+        u = mda.Universe(gro_name,xtcwhole)
+    except:
+        print('MDanalysis failed')
+        continue
+    
     lipids = getLipids(system)
     c = u.select_atoms(lipids)
     ctom = c.atoms.center_of_mass()[2]
@@ -166,4 +182,5 @@ for system in systems:
     os.chdir(cwd)
 
     os.system("rm " +  outputFOLDERS + '/OW.gro')
+    os.system("rm " +  outputFOLDERS + '/P.gro')
     

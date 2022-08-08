@@ -1,0 +1,40 @@
+AUTHORS_CONTACT: Hanne Antila ()
+FF_DATE: ?/?/????
+SYSTEM: Berger_POPC_T303K
+TYPEOFSYSTEM: lipid bilayer
+TEMPERATURE: 303.0
+UNITEDATOM_DICT: null
+PUBLICATION: ??
+NUMBER_OF_ATOMS: 65330
+FFSOL: SPC
+EXPERIMENT:
+  ORDERPARAMETER:
+    POPC: {}
+  FORMFACTOR:
+    10.1016/j.bbamem.2011.07.022: 10.1016/j.bbamem.2011.07.022/2
+FF_SOURCE: https://zenodo.org/record/1402417/
+COMPOSITION:
+  POPC:
+    NAME: POPC
+    COUNT:
+    - 128
+    - 128
+    MAPPING: mappingPOPCberger.txt
+  SOL:
+    NAME: SOL
+    COUNT: 10342
+    MAPPING: mappingSPCwater.txt
+TIMELEFTOUT: 100
+TRJLENGTH: 1200010.0
+TRAJECTORY_SIZE: 29078150944
+SOFTWARE_VERSION: Gpu_version_2020.1
+FF: Berger
+SOFTWARE: gromacs
+PREEQTIME: 0
+DOI: 10.5281/zenodo.4537207
+DATEOFRUNNING: 01/10/2021
+TPR:
+- - protonated.tpr
+TRJ:
+- - prottraj.xtc
+DIR_WRK: /media/osollila/Data/tmp/DATABANK/

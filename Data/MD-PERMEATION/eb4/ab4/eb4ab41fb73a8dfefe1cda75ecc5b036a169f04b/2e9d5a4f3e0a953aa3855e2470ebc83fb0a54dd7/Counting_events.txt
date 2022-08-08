@@ -1,3 +1,5 @@
+ Permeation events over simulation time.
+ t(ns) Number of events
    0.00000000               0
    9.99999978E-03           0
    1.99999996E-02           0
@@ -4998,4 +5000,3 @@
    49.9700012               1
    49.9799995               1
    49.9900017               1
-   50.0000000               1

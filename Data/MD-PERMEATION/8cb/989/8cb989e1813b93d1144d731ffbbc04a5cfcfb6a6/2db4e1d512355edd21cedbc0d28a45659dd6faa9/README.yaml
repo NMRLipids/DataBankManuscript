@@ -10,24 +10,24 @@ EXPERIMENT:
       10.1039/c2cp42738a: 10.1039/c2cp42738a/5
     POPC:
       10.1039/c2cp42738a: 10.1039/c2cp42738a/5
-  FORMFACTOR: {}
+  FORMFACTOR: unpublished/NMRlipidsIII/9
 COMPOSITION:
   CHOL:
     NAME: CHL1
     COUNT:
     - 128
     - 128
-    MAPPING: mappingCHOLESTEROLslipid.txt
+    MAPPING: mappingCHOLESTEROLslipid.yaml
   POPC:
     NAME: POPC
     COUNT:
     - 128
     - 128
-    MAPPING: mappingPOPCslipids.txt
+    MAPPING: mappingPOPCslipids.yaml
   SOL:
     NAME: SOL
     COUNT: 20334
-    MAPPING: mappingTIP3Pwater.txt
+    MAPPING: mappingTIP3Pwater.yaml
 TIMELEFTOUT: 0
 TRJLENGTH: 100100.0
 SOFTWARE_VERSION: 4.6.3

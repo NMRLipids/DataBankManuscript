@@ -120,6 +120,11 @@ time_diff = 500
 
 for system in systems:
 
+    if system['SOFTWARE'] == 'openMM':
+        print('Not yet implemented for openMM')
+        continue
+
+    
     indexingPath = "/".join(system['path'].split("/")[5:9])
     print(indexingPath)
     subdir = '../../Databank/Data/Simulations/' + indexingPath + '/'
@@ -163,6 +168,7 @@ for system in systems:
     #if (not os.path.isfile(xtcwhole)):
     #    os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
 
+    
     xtccentered = subdir + '/centered.xtc'
     if (not os.path.isfile(xtccentered)):
         continue
