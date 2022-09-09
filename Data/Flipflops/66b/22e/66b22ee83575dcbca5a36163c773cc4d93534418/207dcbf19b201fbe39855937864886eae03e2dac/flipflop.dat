@@ -1,1 +1,6 @@
-# time n - 500 (ps)    time n (ps)     molecule
+# res.; time-begin; time-end; to leaflet; outcome
+DPPC    248    2123    2271    1    Fail
+DPPC    394    1842    2006    -1    Fail
+DPPC    441    1103    1208    -1    Fail
+DPPC    441    1514    1663    -1    Fail
+DPPC    441    2352    2477    -1    Fail

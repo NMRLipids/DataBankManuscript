@@ -1,1 +1,18 @@
-# time n - 500 (ps)    time n (ps)     molecule
+# res.; time-begin; time-end; to leaflet; outcome
+POPC    31    1389    1507    1    Fail
+POPC    31    2288    3375    1    Fail
+POPC    31    7167    7608    1    Fail
+POPC    48    2188    2856    1    Fail
+POPC    48    7280    7846    1    Fail
+POPC    55    2981    3084    1    Fail
+POPC    55    6319    6645    1    Fail
+POPC    61    2977    3082    1    Fail
+POPC    83    2001    2504    1    Fail
+POPC    83    7425    7659    1    Fail
+POPC    83    8010    8133    1    Fail
+POPC    108    2193    2300    1    Fail
+POPC    108    2570    2678    1    Fail
+POPC    147    1970    3120    1    Fail
+POPC    147    7506    7654    1    Fail
+POPC    184    2175    2991    1    Fail
+POPC    406    1188    1301    -1    Fail

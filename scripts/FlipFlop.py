@@ -1,33 +1,37 @@
 #Lipid flip-flops
 #loops over trajectories and checks if some molecule (lipid or cholesterol) in membrane flips
+
 import os
 import sys
 import yaml
 import json
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import pdb
 from random import randint
-
-from matplotlib import cm
-from scipy.stats import norm
-
 import urllib.request
 from urllib.error import URLError,HTTPError,ContentTooShortError
 
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import cm
+from scipy.stats import norm
 import MDAnalysis as mda
+from lipyphilic.lib.assign_leaflets import AssignLeaflets
+from lipyphilic.lib.flip_flop import FlipFlop 
 
 sys.path.insert(1, '../../Databank/Scripts/BuildDatabank/')
 from databankLibrary import download_link, lipids_dict, databank
 
-def loadMappingFile(path_to_mapping_file):
-    # load mapping file into a dictionary
+
+
+def loadMappingFile(path_to_mapping_file):    # load mapping file into a dictionary
     mapping_dict = {}
     with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+path_to_mapping_file, "r") as yaml_file:
         mapping_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
     yaml_file.close()
     
     return mapping_dict
+
 
 def getLipids(readme):
         lipids = []
@@ -38,8 +42,10 @@ def getLipids(readme):
                     lipids.append(key)
             except KeyError:
                 continue
+
         return lipids
         
+
 def getAtoms(readme, lipid):
     atoms = ""
     path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
@@ -49,51 +55,13 @@ def getAtoms(readme, lipid):
   
     return atoms
 
-def membraneCentreOfMass(universe, readme):
-    lipids = []
-    for key_mol in lipids_dict:
-        if key_mol in readme['COMPOSITION'].keys():
-            selection = ""
-            m_file = readme['COMPOSITION'][key_mol]['MAPPING']
-            
-            with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+m_file,"r") as f:
-                mapping = yaml.load(f, Loader=yaml.FullLoader)
+def headgroupAtom(readme, lipid):
+    path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
+    mapping_dict = loadMappingFile(path_to_mapping_file)
+    for key in mapping_dict:
+        if mapping_dict[key]['FRAGMENT'] == 'headgroup': 
+            return mapping_dict[key]['ATOMNAME']
 
-            for atom in mapping:
-                try:
-                    selection = selection + "(resname " + mapping[atom]['RESIDUE'] + " and name " + mapping[atom]['ATOMNAME'] + ") or "
-                except:
-                                   
-                #for line in f:
-                #    if len(line.split()) > 2 and "Individual atoms" not in line:
-                #        selection = selection + "(resname " + line.split()[2] + " and name " + line.split()[1] + ") or "
-                #    elif "Individual atoms" in line:
-                #        continue
-                #    else:
-                    selection = "resname " + readme['COMPOSITION'][key_mol]['NAME']
-                        #print(selection)
-                #        break
-            selection = selection.rstrip(' or ')
-            #print("selection    " + selection)
-            molecules = universe.select_atoms(selection)
-          #  print("molecules")
-          #  print(molecules)
-            if molecules.n_residues > 0:
-                lipids.append(universe.select_atoms(selection))
-            #print(lipids) 
-    # join all the selected the lipids together to make a selection of the entire membrane and calculate the
-    # z component of the centre of mass of the membrane
-    membrane = universe.select_atoms("")   # causes a warning: UserWarning: Empty string to select atoms, empty group returned, but it's ok
-    R_membrane_z = 0
-    if lipids != []:
-        for i in range(0,len(lipids)):
-            membrane = membrane + lipids[i]
-            #print("membrane") 
-            #print(membrane)  
-    R_membrane = membrane.center_of_mass()[2]
-    #print(R_membrane)
-    return R_membrane
-    
 def headgroupAtoms(readme,lipid):
     mapping_file = loadMappingFile(readme['COMPOSITION'][lipid]['MAPPING'])
     #returns atom names labeled as belonging to headgroup in the mapping file
@@ -105,214 +73,225 @@ def headgroupAtoms(readme,lipid):
     #if names in structure file contain ' characters add escape sign
     if "\'" in headgroup:
         headgroup = headgroup.replace("'","\'")
-    
     return headgroup
     
+def centerxtcfile(system, system_path):
+    # FIND LAST CARBON OF SN-1 TAIL AND G3 CARBON
+    for molecule in system['COMPOSITION']:
+        if molecule in lipids_dict:
+            mapping_file = f"../../Databank/Scripts/BuildDatabank/mapping_files/{system['COMPOSITION'][molecule]['MAPPING']}"
+            with open(mapping_file, "r") as yaml_file:
+                mapping = yaml.load(yaml_file,  Loader=yaml.FullLoader)
+            try:
+                G3atom = mapping['M_G3_M']['ATOMNAME']
+            except:
+                pass
 
-#path = '../../Databank/Data/Simulations/006/559/006559139e730fc43b244726992145c2f37a1461/3c99810c45a83b4ba0e54a69fdea8817498a8930/'
+            for Cindex in range(1,30):
+                atom = f'M_G1C{str(Cindex)}_M'
+                try:
+                    lastAtom = mapping[atom]['ATOMNAME']
+                except:
+                    continue
+
+    # Center around one lipid tail CH3 to guarantee all lipids in the same box
+    if 'gromacs' in system['SOFTWARE']:
+        if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
+            trjconvCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/trjconv'
+            makendxCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/make_ndx'
+        else:
+            trjconvCOMMAND = 'gmx trjconv'
+            makendxCOMMAND = 'gmx make_ndx'
+
+        os.system('rm foo.ndx')
+        os.system(f'echo "a {lastAtom}\nq" | {makendxCOMMAND} -f {tpr_name} -o foo.ndx')
+        os.system("tail -n1 foo.ndx | awk '{print $NF}'")
+        os.system('echo "[ centralAtom ]" >> foo.ndx')
+        os.system("tail -n2 foo.ndx | head -n1 |  awk '{print $NF}' >> foo.ndx")
+
+        xtcwhole = f'{system_path}/whole.xtc'
+        xtcfoo = f'{system_path}/foo2.xtc'
+        xtccentered = f'{system_path}/centered.xtc'
+        if (not os.path.isfile(xtccentered)):
+            print("Make molecules whole in the trajectory")
+            if (not os.path.isfile(xtcfoo)):
+                os.system(f'echo "centralAtom\nSystem" |  {trjconvCOMMAND} -center -pbc mol -n foo.ndx -f {xtcwhole} -s {tpr_name} -o {xtcfoo}')
+
+            os.system('rm foo.ndx')
+            os.system(f'rm {xtcwhole}')
+
+            os.system(f'echo "a {G3atom}\nq" | {makendxCOMMAND} -f {tpr_name} -o foo.ndx')
+            os.system(f'echo "{G3atom}\nSystem" |  {trjconvCOMMAND} -center -pbc mol -n foo.ndx -f {xtcfoo} -s {tpr_name} -o {xtccentered}')
+            os.system(f'rm {xtcfoo}')
+    else:
+        print('Centering for other than Gromacs may not work if there are jumps over periodic boundary conditions in z-direction.')
+
+
+print("Loading README files")
 path = '../../Databank/Data/Simulations/'
-db_data = databank(path)
+db_data = databank(path)      #searches through every subfolder of a path and finds every trajectory in databank
 systems = db_data.get_systems()
 
-
-#compare frames every 500 ps
-time_diff = 500 
-
-for system in systems:
-
-    if system['SOFTWARE'] == 'openMM':
-        print('Not yet implemented for openMM')
-        continue
-
-    
+for system in systems:   #checks everysystem for flipflop
+    #directories
     indexingPath = "/".join(system['path'].split("/")[5:9])
-    print(indexingPath)
-    subdir = '../../Databank/Data/Simulations/' + indexingPath + '/'
-    DATAdir = '../Data/Flipflops/' + indexingPath + '/'
-    
-    if (not os.path.isdir(DATAdir)):
-        os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0])
-        os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0] + '/' + indexingPath.split('/')[1])
-        os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0] + '/' + indexingPath.split('/')[1] + '/' + indexingPath.split('/')[2])
-        os.system('mkdir ../Data/Flipflops/' + indexingPath.split('/')[0] + '/' + indexingPath.split('/')[1] + '/' + indexingPath.split('/')[2] + '/' + indexingPath.split('/')[3]) 
-        
-    flipflop_file = DATAdir + 'flipflop.dat' #change later
+    subdir = f'../../Databank/Data/Simulations/{indexingPath}/'
+    DATAdir = f'../Data/Flipflops/{indexingPath}/'
 
-    if (os.path.isfile(flipflop_file)):
+    if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
         continue
+        trjconvCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/trjconv'
+    else:
+        trjconvCOMMAND = 'gmx trjconv'
 
-    #print(system['TYPEOFSYSTEM'])
+    #exception skiping
+    if system['SOFTWARE'] == 'openMM':
+        print('OpenMM')
+        continue
+        print('Warning: using openMM which cant be centered by this code')
+
+    if system['SOFTWARE'] == 'gromacs':                 
+        if 'SOFTWARE_VERSION' in system:
+            if system['SOFTWARE_VERSION'] == '3.x':
+                continue                                          #comment this if you have gromacs 3
+                pass
+
     if system['TYPEOFSYSTEM'] == 'miscellaneous':
         continue
 
-    os.system('cp ' + subdir + '/README.yaml ' + DATAdir + '/')
-   
+    if os.path.isfile(flipflop_file):
+        print("skipped")
+        continue
 
-                
+#    if indexingPath.split('/')[2] != '304765469045020262110ceea29c4a404b503c63':    #testing trajectory
+#        continue
+
+    #building directory and file system
+    if (not os.path.isdir(DATAdir)):
+        hashes = indexingPath.split('/')
+        os.system(f"mkdir ../Data/Flipflops/{hashes[0]}")
+        os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}")
+        os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}")
+        os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}/{hashes[3]}") 
+
+    os.system(f'cp {subdir}README.yaml {DATAdir}/')
+   
+    #getting data from databank and proprocessing them                
     doi = system['DOI']
-    trj=system['TRJ'][0][0]
-    tpr=system['TPR'][0][0]
-    trj_name = subdir +  trj
+    trj = system['TRJ'][0][0]
+    tpr = system['TPR'][0][0]
+    trj_name = subdir + trj
     tpr_name = subdir + tpr
     trj_url = download_link(doi, trj)
     tpr_url = download_link(doi, tpr)
-    EQtime=float(system['TIMELEFTOUT'])*1000
+    EQtime = float(system['TIMELEFTOUT'])*1000
+    flipflop_file = f'{DATAdir}flipflop.dat'
 
-    #if (not os.path.isfile(tpr_name)):
-    #    response = urllib.request.urlretrieve(tpr_url, tpr_name)
-                        
-    #if (not os.path.isfile(trj_name)):
-    #    response = urllib.request.urlretrieve(trj_url, trj_name)
-                    
-    #xtcwhole=subdir + '/whole.xtc'
-    #if (not os.path.isfile(xtcwhole)):
-    #    os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
-
-    
-    xtccentered = subdir + '/centered.xtc'
-    if (not os.path.isfile(xtccentered)):
-        continue
-
+    #downloading missing files
     try:
+        if (not os.path.isfile(tpr_name)):
+            #continue
+            print("downloading tpr", doi)
+            response = urllib.request.urlretrieve(tpr_url, tpr_name)
+        
+        if (not os.path.isfile(trj_name)):
+            print("downloading trj", doi)
+            response = urllib.request.urlretrieve(trj_url, trj_name)
+    except:
+        os.system(f"rm {subdir}/{trj_name} {subdir}/{tpr_name}")
+        continue
+                   
+    #preparing trajetory
+    xtcwhole = f'{subdir}whole.xtc'
+    xtccentered = f'{subdir}centered.xtc'
+    if not (os.path.isfile(xtcwhole) or os.path.isfile(xtccentered)):
+        print("making molecules whole")
+        os.system(f'echo System | {trjconvCOMMAND} -f {trj_name} -s {tpr_name} -o {xtcwhole} -pbc mol -b {EQtime}')
+        print('sys1')
+
+    if (not os.path.isfile(xtccentered)):
+        print("centering")
+        centerxtcfile(system,subdir)
+    
+    #setting MDAnalysis
+    try:
+        print("Loading system", doi)
         u = mda.Universe(tpr_name,xtccentered)
     except:
-        print('Reading of data with MDanalysis failed')
+        print('Reading of data with MDanalysis failed', indexingPath)
+        #pdb.set_trace()
         continue
         
+    #reading lipid names and their head-group atoms
     lipids = getLipids(system)
-   # print(lipids)            
-    end = len(u.trajectory)
-                
-    dt = int(u.trajectory.dt)
+    names = [system['COMPOSITION'][lipid]['NAME'] for lipid in lipids]
+    decode = dict(zip(names, lipids))
+    headgroupatoms = [headgroupAtom(system, lipid)for lipid in lipids]
 
-    #print(end,dt)
-    if dt == 0:
-        continue
+    #atom selection in MDAnalysis
+    HGnames = f"name {' '.join(headgroupatoms)}"
+    lipidnames = f"resname {' '.join(lipids)}"
+
+    lipid_sys = u.select_atoms(lipidnames)
+
+    headatoms_sys = u.select_atoms(HGnames)
     
-    start = int(EQtime / dt)
-    flipflops = 0
+    #puting trajectory in to a much larger box to remove wraping of molecules
+    print("Preprocessing trajectory")
+    preparedfile = f'{subdir}smth.xtc'
+    with mda.Writer(preparedfile, u.atoms.n_atoms) as w:
+        for ts in u.trajectory:
+            ts.dimensions = [1000, 1000, 1000, 90, 90, 90]
+            lipid_center = headatoms_sys.center_of_geometry(pbc=True)
+            dim = ts.triclinic_dimensions
+            box_center = np.sum(dim, axis=0) / 2
+            u.atoms.translate(box_center - lipid_center)
+            w.write(u.atoms)
+    u = mda.Universe(tpr_name,preparedfile)
+
+    #analysing trajectory with LiPyphilic
+    print("Assigning atoms to leaflets")
+    leaflets = AssignLeaflets(
+        universe=u,
+        lipid_sel=HGnames,          # names of a headgroup atom from each lipid used in simulation
+        midplane_sel=HGnames,       # only cholesterol is allowed to flip-flop      ??
+        midplane_cutoff=10.0,          # buffer size for assigning molecules to the midplane
+        )
+    leaflets.run()
     
-    # compare frames i and i - 500 ps
-    # if saving frequency is greater than 500 ps then there's no need to skip
-    skip = int(time_diff / dt)
-    if time_diff < dt:
-        skip = 1
-    
- #   print("EQtime " + str(EQtime))
- #   print("start " + str(start))
- #   print("dt " + str(dt))
- #   print("end " + str(end))
- #   print("skip " + str(skip))
- #   print("time_diff  " + str(time_diff))
-                
-    frames_lipids = []
+    print("Counting flipflops")
+    flip_flop = FlipFlop(
+        universe=u,
+        lipid_sel=HGnames,
+        leaflets=leaflets.filter_leaflets(HGnames),  # pass only the relevant leaflet data
+        frame_cutoff=100,
+        )
 
-    for lipid in lipids:
-        #save state of the leaflet in previous frames
-        previous_leaflet = []
-        lipid_atoms = getAtoms(system, lipid)
-        
-        headgroup_atoms = headgroupAtoms(system,lipid)
+    flip_flop.run(
+        start=None,
+        stop=None,
+        step=None
+        )
 
-        lipid_resname = system['COMPOSITION'][lipid]['NAME']
-
-        headgroup_atoms_selection = u.select_atoms('resname ' + lipid_resname + ' and name' + headgroup_atoms).split('residue')  
-     
-        #print(headgroup_atoms_selection)
-     #   print(lipid + "  " +lipid_resname)
-        
-     #   print(lipid_atoms)
-     #   print(lipid_atoms_selection)
-     
-        #every 500th frame for checking flip flops
-
-        frame_index = 0
-
-        for ts in u.trajectory[::skip]:
-            #print("frame " + str(ts.frame), ts)
-            time = u.trajectory.time
-            
-            R_m = membraneCentreOfMass(u, system)
-            
-            l_leaflet_fr = []
-            
-            for i, hg in enumerate(headgroup_atoms_selection):   #!!!!
-                #print(i, hg[0].resid)
-                hg_z = hg.center_of_mass()[2]
-                #hg_resid = i
-                hg_resid = hg[0].resid
-                if hg_z < R_m:
-                    l_leaflet_fr.append([hg_resid, 'l1']) #in leaflet 1
-                if hg_z > R_m:
-                    l_leaflet_fr.append([hg_resid,'l2']) #in leaflet 2       
-
-                               
-            #print("l_leaflet_fr")
-            #print(l_leaflet_fr)
-            
-            #check if lipid has changed leaflet between frames
-            #if ts.frame != start and ts.frame != start + skip and ts.frame != start + 2*skip: # first two frames
-             #   print(previous_leaflet)
-
-            previous_leaflet.append(l_leaflet_fr.copy())
-            
-            if frame_index < 2:     #Skip first two frames
-                frame_index += 1
-                continue
-
-            for j in range(0,len(l_leaflet_fr)-1):
-                
-                #index_1 = int(ts.frame/(skip)-start)-1 
-                #index_2 = int(ts.frame/(skip)-start)-2 
-
-                index_1 = frame_index-1
-                index_2 = frame_index-2
-                
-                #print(previous_leaflet[index_1])
-                #print(previous_leaflet[index_2])
-                
-                #print(l_leaflet_fr[j][0], l_leaflet_fr[j][1])
-                #print(previous_leaflet[index_1][j][0], previous_leaflet[index_1][j][1])
-                #print(frame_index, start)
-                #print(previous_leaflet[frame_index-1])
-                # is lipid location in current frame different from the lipid location in the two previous frames
-                if l_leaflet_fr[j][0] == previous_leaflet[index_1][j][0] and l_leaflet_fr[j][1] != previous_leaflet[index_1][j][1] and l_leaflet_fr[j][0] == previous_leaflet[index_2][j][0] and l_leaflet_fr[j][1] != previous_leaflet[index_2][j][1]: # RESID SAME BUT LEAFLET IS DIFFERENT
-                    #print("FLIP FLOP")
-                    flipflops += 1
-                    res_index = l_leaflet_fr[j][0]
-                    frames_lipids.append([str(time - time_diff) + ' ' + str(time) + '   ' + lipid + ' ' + str(res_index) + ' ' + str(ts.frame - skip) + ' ' + str(ts.frame)    ])
-                                    
-                        
-                                    
-            frame_index += 1
-                
-
-                            
-       # print(flipflops) 
-       
-    time_btwn_frames = time_diff
-    
-    if time_diff < dt:
-        time_btwn_frames = dt   
-       
+    #writing output file
     with open(flipflop_file, 'w') as f:
-         f.write('# time n - ' + str(time_btwn_frames) + ' (ps)    time n (ps)     molecule\n')
-                        
-    f.close()               
+        f.write(f'# res.; time-begin; time-end; to leaflet; outcome\n')
+        f.close()               
                        
-                            
-    if flipflops > 0:
-        print('number of flip flops in trajectory is ' + str(flipflops) + " in the simulation in directory " + indexingPath)
+    if len(flip_flop.flip_flop_success) > 0:
+        output = np.vstack((flip_flop.flip_flops.T,np.transpose(flip_flop.flip_flop_success))).T
+        print(f'number of flip flops in trajectory is {len(output)} in the simulation in directory {indexingPath}')
 
-       # save frame nr and lipid name
+        with open(flipflop_file, 'a') as f:
+            for fr in output:
+                fr[0] = str(int(fr[0])+1)
+                if fr[1] >= fr[2]:
+                    continue
+                resname = decode[u.select_atoms(f'resid {fr[0]}').residues.resnames[0]]
+                print(resname)
+                f.write(f'{str(resname)}    {"    ".join(fr)}\n')
+            f.close()
     else:
         print("no flip flops in trajectory")
-
-    with open(flipflop_file, 'a') as f:
-        for fr in frames_lipids:
-            f.write(str(fr).strip("[]'") + '\n')
-    #f.close()
-
-                                    
-                
-                
+    
+    os.system(f'rm {preparedfile}')

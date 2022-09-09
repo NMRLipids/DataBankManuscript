@@ -1,4 +1,2 @@
-# time n - 500 (ps)    time n (ps)     molecule
-1653000.0 1653500.0   CHOL 4 16530 16535
-1660500.0 1661000.0   CHOL 4 16605 16610
-1664000.0 1664500.0   CHOL 4 16640 16645
+# res.; time-begin; time-end; to leaflet; outcome
+CHOL    4    16564    16646    -1    Success

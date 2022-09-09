@@ -1,3 +1,1 @@
-# time n - 1000 (ps)    time n (ps)     molecule
-202500.0 203000.0   CHOL 281 2 3
-205500.0 206000.0   CHOL 281 5 6
+# res.; time-begin; time-end; to leaflet; outcome
