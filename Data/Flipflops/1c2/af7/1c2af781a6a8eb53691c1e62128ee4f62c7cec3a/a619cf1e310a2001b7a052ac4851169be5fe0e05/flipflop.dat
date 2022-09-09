@@ -1,1 +1,7 @@
-# time n - 500 (ps)    time n (ps)     molecule
+# res.; time-begin; time-end; to leaflet; outcome
+POPG    137    2008    2204    1    Fail
+POPG    223    7671    8112    1    Fail
+POPG    241    8002    8313    1    Fail
+POPG    248    7655    8316    1    Fail
+POPG    250    7720    8247    1    Fail
+POPG    376    7632    7755    -1    Fail

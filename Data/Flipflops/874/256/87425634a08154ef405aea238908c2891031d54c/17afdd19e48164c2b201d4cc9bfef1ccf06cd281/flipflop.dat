@@ -1,1 +1,2 @@
-# time n - 500 (ps)    time n (ps)     molecule
+# res.; time-begin; time-end; to leaflet; outcome
+POPC    376    5834    6057    -1    Fail
