@@ -137,13 +137,20 @@ for system in systems:   #checks everysystem for flipflop
     indexingPath = "/".join(system['path'].split("/")[5:9])
     subdir = f'../../Databank/Data/Simulations/{indexingPath}/'
     DATAdir = f'../Data/Flipflops/{indexingPath}/'
+    flipflop_file = f'{DATAdir}flipflop.dat'
 
+    os.system(f'cp {subdir}README.yaml {DATAdir}/')
+    
     if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
         continue
         trjconvCOMMAND = '/home/osollila/Programs/gromacs/gromacs402/bin/trjconv'
     else:
         trjconvCOMMAND = 'gmx trjconv'
 
+    if 'WARNINGS' in system and 'ORIENTATION' in system['WARNINGS']:
+        print(system['path'] + '  skipped because of orientation warning')
+        continue
+        
     #exception skiping
     if system['SOFTWARE'] == 'openMM':
         print('OpenMM')
@@ -159,6 +166,7 @@ for system in systems:   #checks everysystem for flipflop
     if system['TYPEOFSYSTEM'] == 'miscellaneous':
         continue
 
+    #os.system(f'cp {subdir}README.yaml {DATAdir}/')
     if os.path.isfile(flipflop_file):
         print("skipped")
         continue
@@ -174,7 +182,7 @@ for system in systems:   #checks everysystem for flipflop
         os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}")
         os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}/{hashes[3]}") 
 
-    os.system(f'cp {subdir}README.yaml {DATAdir}/')
+    #os.system(f'cp {subdir}README.yaml {DATAdir}/')
    
     #getting data from databank and proprocessing them                
     doi = system['DOI']
@@ -185,7 +193,6 @@ for system in systems:   #checks everysystem for flipflop
     trj_url = download_link(doi, trj)
     tpr_url = download_link(doi, tpr)
     EQtime = float(system['TIMELEFTOUT'])*1000
-    flipflop_file = f'{DATAdir}flipflop.dat'
 
     #downloading missing files
     try:
@@ -284,6 +291,7 @@ for system in systems:   #checks everysystem for flipflop
 
         with open(flipflop_file, 'a') as f:
             for fr in output:
+                print(fr)
                 fr[0] = str(int(fr[0])+1)
                 if fr[1] >= fr[2]:
                     continue

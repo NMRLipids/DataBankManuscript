@@ -1,0 +1,8 @@
+# res.; time-begin; time-end; to leaflet; outcome
+CHOL    1045    427    444    1    Success
+CHOL    1200    170    184    1    Success
+CHOL    1206    286    501    -1    Fail
+CHOL    1286    296    303    -1    Success
+CHOL    1335    746    785    1    Success
+CHOL    1404    413    433    1    Success
+CHOL    1422    453    583    -1    Success
