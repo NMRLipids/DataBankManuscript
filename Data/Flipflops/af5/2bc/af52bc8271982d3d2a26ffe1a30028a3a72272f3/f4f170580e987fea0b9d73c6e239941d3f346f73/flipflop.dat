@@ -1,0 +1,11 @@
+# res.; time-begin; time-end; to leaflet; outcome
+DOG    269    18828    19564    1    Fail
+DOG    269    25918    26725    1    Fail
+DOG    278    29223    29301    -1    Success
+DOG    278    29469    29735    -1    Fail
+DOG    281    25137    25304    1    Fail
+DOG    287    43158    43478    1    Success
+DOG    296    15727    16290    -1    Fail
+DOG    296    17100    17244    -1    Fail
+DOG    299    4375    4792    -1    Fail
+DOG    299    4915    5603    1    Success

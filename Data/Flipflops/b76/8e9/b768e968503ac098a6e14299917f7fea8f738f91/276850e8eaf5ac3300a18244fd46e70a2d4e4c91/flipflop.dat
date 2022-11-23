@@ -1,3 +1,19 @@
 # res.; time-begin; time-end; to leaflet; outcome
-DLPC    32    6760    7064    1    Fail
-DLPC    34    6718    6819    1    Fail
+DLPC    6    8889    9026    1    Fail
+DLPC    8    23645    23751    1    Fail
+DLPC    14    3646    3870    1    Fail
+DLPC    14    24094    24212    1    Fail
+DLPC    14    24913    25019    1    Fail
+DLPC    19    6228    6492    1    Fail
+DLPC    19    6756    6860    1    Fail
+DLPC    25    11401    11542    1    Fail
+DLPC    27    9646    9774    1    Fail
+DLPC    31    1881    2034    1    Fail
+DLPC    32    6680    6878    1    Fail
+DLPC    33    2623    2849    1    Fail
+DLPC    34    7176    7288    1    Fail
+DLPC    35    12928    13237    1    Fail
+DLPC    44    28025    28157    -1    Fail
+DLPC    47    16153    16283    -1    Fail
+DLPC    56    9401    9546    -1    Fail
+DLPC    67    12857    12960    -1    Fail

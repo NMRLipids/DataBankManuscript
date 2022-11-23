@@ -1,15 +1,9 @@
 # res.; time-begin; time-end; to leaflet; outcome
-POPG    99    5195    5343    1    Fail
-POPG    99    6629    6731    1    Fail
-POPG    110    5330    5449    1    Fail
-POPG    129    8886    9324    1    Fail
-POPE    402    5054    5343    1    Fail
-POPE    402    6457    6781    1    Fail
-POPE    402    6888    6991    1    Fail
-POPE    425    8881    9411    1    Fail
-POPE    426    8951    9054    1    Fail
-POPE    426    9167    9304    1    Fail
-POPE    427    6336    6497    1    Fail
-POPE    429    5058    5552    1    Fail
-POPE    429    5946    6743    1    Fail
-POPE    429    6873    7068    1    Fail
+POPE    406    4581    7378    1    Fail
+POPE    406    9130    9325    1    Fail
+POPE    408    5129    5241    1    Fail
+POPE    425    8882    9378    1    Fail
+POPE    426    8884    9386    1    Fail
+POPE    429    5239    5531    1    Fail
+POPE    429    5867    5980    1    Fail
+POPE    429    6103    7028    1    Fail

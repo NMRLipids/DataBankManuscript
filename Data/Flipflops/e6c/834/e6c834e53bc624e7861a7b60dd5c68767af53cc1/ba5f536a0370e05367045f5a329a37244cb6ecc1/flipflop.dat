@@ -1,2 +1,7 @@
 # res.; time-begin; time-end; to leaflet; outcome
-POPG    1208    8274    8441    -1    Fail
+POPG    1079    4043    4147    1    Fail
+POPG    1208    105    283    -1    Fail
+POPG    1208    710    940    -1    Fail
+POPG    1208    1614    1720    -1    Fail
+POPG    1208    8398    8578    -1    Fail
+POPG    1301    8970    9346    -1    Fail

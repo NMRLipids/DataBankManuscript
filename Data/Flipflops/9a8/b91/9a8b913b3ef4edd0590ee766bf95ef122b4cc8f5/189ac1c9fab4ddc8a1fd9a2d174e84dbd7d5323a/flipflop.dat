@@ -1,2 +1,16 @@
 # res.; time-begin; time-end; to leaflet; outcome
-DPPG    277    1876    2079    -1    Fail
+DPPG    4    786    924    1    Fail
+DPPG    23    692    839    1    Fail
+DPPG    42    602    844    1    Fail
+DPPG    65    670    924    1    Fail
+DPPG    68    1542    1967    1    Fail
+DPPG    92    627    786    1    Fail
+DPPG    116    1542    1673    1    Fail
+DPPG    156    1804    1943    -1    Fail
+DPPG    246    1457    1594    -1    Fail
+DPPG    277    421    548    -1    Fail
+DPPG    277    794    969    -1    Fail
+DPPG    277    1618    2023    -1    Fail
+DPPG    277    2262    2370    -1    Fail
+DPPG    284    747    939    -1    Fail
+DPPG    284    1761    2169    -1    Fail

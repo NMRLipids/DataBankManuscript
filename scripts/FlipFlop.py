@@ -44,7 +44,16 @@ def getLipids(readme):
                 continue
 
         return lipids
-        
+
+def selectLipids(readme):
+    lipids = 'resname '
+    for lipid in readme['COMPOSITION']:
+        if lipid not in lipids_dict:
+            continue
+        else:
+            lipids = lipids + readme['COMPOSITION'][lipid]['NAME']
+            return lipids
+
 
 def getAtoms(readme, lipid):
     atoms = ""
@@ -65,15 +74,20 @@ def headgroupAtom(readme, lipid):
 def headgroupAtoms(readme,lipid):
     mapping_file = loadMappingFile(readme['COMPOSITION'][lipid]['MAPPING'])
     #returns atom names labeled as belonging to headgroup in the mapping file
-    headgroup = ""
+    #headgroup = ""
     for key in mapping_file:
+        if 'H' in key:
+            continue
         if mapping_file[key]['FRAGMENT'] == 'headgroup':
-            headgroup = headgroup + " " + mapping_file[key]['ATOMNAME']
-            
+            headgroupATOM = mapping_file[key]['ATOMNAME']
+            try:
+                headgroupRES = mapping_file[key]['RESNAME']
+            except:
+                headgroupRES = readme['COMPOSITION'][lipid]['NAME']
     #if names in structure file contain ' characters add escape sign
-    if "\'" in headgroup:
-        headgroup = headgroup.replace("'","\'")
-    return headgroup
+    #if "\'" in headgroup:
+    #    headgroup = headgroup.replace("'","\'")
+    return 'name ' + headgroupATOM + ' and resname ' + headgroupRES
     
 def centerxtcfile(system, system_path):
     # FIND LAST CARBON OF SN-1 TAIL AND G3 CARBON
@@ -139,7 +153,6 @@ for system in systems:   #checks everysystem for flipflop
     DATAdir = f'../Data/Flipflops/{indexingPath}/'
     flipflop_file = f'{DATAdir}flipflop.dat'
 
-    os.system(f'cp {subdir}README.yaml {DATAdir}/')
     
     if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
         continue
@@ -157,11 +170,11 @@ for system in systems:   #checks everysystem for flipflop
         continue
         print('Warning: using openMM which cant be centered by this code')
 
-    if system['SOFTWARE'] == 'gromacs':                 
-        if 'SOFTWARE_VERSION' in system:
-            if system['SOFTWARE_VERSION'] == '3.x':
-                continue                                          #comment this if you have gromacs 3
-                pass
+#    if system['SOFTWARE'] == 'gromacs':                 
+#        if 'SOFTWARE_VERSION' in system:
+#            if system['SOFTWARE_VERSION'] == '3.x':
+#                continue                                          #comment this if you have gromacs 3
+#                pass
 
     if system['TYPEOFSYSTEM'] == 'miscellaneous':
         continue
@@ -182,7 +195,8 @@ for system in systems:   #checks everysystem for flipflop
         os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}")
         os.system(f"mkdir ../Data/Flipflops/{hashes[0]}/{hashes[1]}/{hashes[2]}/{hashes[3]}") 
 
-    #os.system(f'cp {subdir}README.yaml {DATAdir}/')
+    
+    os.system(f'cp {subdir}README.yaml {DATAdir}/')
    
     #getting data from databank and proprocessing them                
     doi = system['DOI']
@@ -222,7 +236,7 @@ for system in systems:   #checks everysystem for flipflop
     
     #setting MDAnalysis
     try:
-        print("Loading system", doi)
+        print("Loading system", system['path'])
         u = mda.Universe(tpr_name,xtccentered)
     except:
         print('Reading of data with MDanalysis failed', indexingPath)
@@ -230,21 +244,12 @@ for system in systems:   #checks everysystem for flipflop
         continue
         
     #reading lipid names and their head-group atoms
-    lipids = getLipids(system)
-    names = [system['COMPOSITION'][lipid]['NAME'] for lipid in lipids]
-    decode = dict(zip(names, lipids))
-    headgroupatoms = [headgroupAtom(system, lipid)for lipid in lipids]
+    #lipids = getLipids(system)
 
-    #atom selection in MDAnalysis
-    HGnames = f"name {' '.join(headgroupatoms)}"
-    lipidnames = f"resname {' '.join(lipids)}"
-
-    lipid_sys = u.select_atoms(lipidnames)
-
-    headatoms_sys = u.select_atoms(HGnames)
-    
     #puting trajectory in to a much larger box to remove wraping of molecules
     print("Preprocessing trajectory")
+    print(selectLipids(system))
+    headatoms_sys = u.select_atoms(selectLipids(system))
     preparedfile = f'{subdir}smth.xtc'
     with mda.Writer(preparedfile, u.atoms.n_atoms) as w:
         for ts in u.trajectory:
@@ -256,50 +261,72 @@ for system in systems:   #checks everysystem for flipflop
             w.write(u.atoms)
     u = mda.Universe(tpr_name,preparedfile)
 
-    #analysing trajectory with LiPyphilic
-    print("Assigning atoms to leaflets")
-    leaflets = AssignLeaflets(
-        universe=u,
-        lipid_sel=HGnames,          # names of a headgroup atom from each lipid used in simulation
-        midplane_sel=HGnames,       # only cholesterol is allowed to flip-flop      ??
-        midplane_cutoff=10.0,          # buffer size for assigning molecules to the midplane
-        )
-    leaflets.run()
-    
-    print("Counting flipflops")
-    flip_flop = FlipFlop(
-        universe=u,
-        lipid_sel=HGnames,
-        leaflets=leaflets.filter_leaflets(HGnames),  # pass only the relevant leaflet data
-        frame_cutoff=100,
-        )
-
-    flip_flop.run(
-        start=None,
-        stop=None,
-        step=None
-        )
-
-    #writing output file
     with open(flipflop_file, 'w') as f:
         f.write(f'# res.; time-begin; time-end; to leaflet; outcome\n')
         f.close()               
-                       
-    if len(flip_flop.flip_flop_success) > 0:
-        output = np.vstack((flip_flop.flip_flops.T,np.transpose(flip_flop.flip_flop_success))).T
-        print(f'number of flip flops in trajectory is {len(output)} in the simulation in directory {indexingPath}')
+    
+    for lipid in system['COMPOSITION']:
+        #names = [system['COMPOSITION'][lipid]['NAME'] for lipid in lipids]
+        #decode = dict(zip(names, lipids))
+        if lipid not in lipids_dict:
+            continue
+        headgroupatoms = headgroupAtoms(system, lipid)
 
-        with open(flipflop_file, 'a') as f:
-            for fr in output:
-                print(fr)
-                fr[0] = str(int(fr[0])+1)
-                if fr[1] >= fr[2]:
-                    continue
-                resname = decode[u.select_atoms(f'resid {fr[0]}').residues.resnames[0]]
-                print(resname)
-                f.write(f'{str(resname)}    {"    ".join(fr)}\n')
-            f.close()
-    else:
-        print("no flip flops in trajectory")
+        print(lipid)
+        
+        #atom selection in MDAnalysis
+        #HGnames = f"name {' '.join(headgroupatoms)}"
+        #lipidnames = f"resname {' '.join(lipids)}"
+
+        #lipid_sys = u.select_atoms(lipidnames)
+
+        print(headgroupatoms)
+        
+    
+
+        #analysing trajectory with LiPyphilic
+        print("Assigning atoms to leaflets")
+        leaflets = AssignLeaflets(
+            universe=u,
+            lipid_sel=headgroupatoms,          # names of a headgroup atom from each lipid used in simulation
+            midplane_sel=headgroupatoms,       # only cholesterol is allowed to flip-flop      ??
+            midplane_cutoff=10.0,          # buffer size for assigning molecules to the midplane
+        )
+        leaflets.run()
+    
+        print("Counting flipflops")
+        #print(HGnames)
+        flip_flop = FlipFlop(
+            universe=u,
+            lipid_sel=headgroupatoms,
+            leaflets=leaflets.filter_leaflets(headgroupatoms),  # pass only the relevant leaflet data
+            frame_cutoff=100,
+        )
+
+        flip_flop.run(
+            start=None,
+            stop=None,
+            step=None
+        )
+
+        #print(flip_flop)
+        #writing output file
+                       
+        if len(flip_flop.flip_flop_success) > 0:
+            output = np.vstack((flip_flop.flip_flops.T,np.transpose(flip_flop.flip_flop_success))).T
+            print(f'number of flip flops in trajectory is {len(output)} in the simulation in directory {indexingPath}')
+
+            with open(flipflop_file, 'a') as f:
+                for fr in output:
+                    print(fr)
+                    fr[0] = str(int(fr[0])+1)
+                    if fr[1] >= fr[2]:
+                        continue
+                    resname = lipid #decode[u.select_atoms(f'resid {fr[0]}').residues.resnames[0]]
+                    print(resname)
+                    f.write(f'{str(resname)}    {"    ".join(fr)}\n')
+                f.close()
+        else:
+            print("no flip flops in trajectory")
     
     os.system(f'rm {preparedfile}')

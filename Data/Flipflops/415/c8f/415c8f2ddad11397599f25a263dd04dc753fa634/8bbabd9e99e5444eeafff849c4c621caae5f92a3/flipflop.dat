@@ -1,1 +1,9 @@
 # res.; time-begin; time-end; to leaflet; outcome
+POPG    6    6479    6692    1    Fail
+POPG    66    4220    4345    1    Fail
+POPE    388    4242    4399    1    Fail
+POPE    415    1314    1475    1    Fail
+POPE    415    5310    5650    1    Fail
+POPE    472    558    672    -1    Fail
+POPE    472    1992    2159    -1    Fail
+POPE    472    3719    3946    -1    Fail

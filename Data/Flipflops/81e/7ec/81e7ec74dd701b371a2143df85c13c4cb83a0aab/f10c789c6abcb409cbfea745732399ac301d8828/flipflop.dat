@@ -1,8 +1,10 @@
 # res.; time-begin; time-end; to leaflet; outcome
-DOG    6753    19796    19936    1    Fail
-DOG    6756    96195    96437    1    Fail
-DOG    6756    96598    97158    -1    Success
-DOG    6762    61908    62658    -1    Success
-DOG    6762    70264    70469    -1    Fail
-DOG    6762    70601    70862    1    Success
-DOG    6765    44965    45118    1    Fail
+SDG    6753    19808    19931    1    Fail
+SDG    6756    96219    96334    1    Fail
+SDG    6756    96633    97192    -1    Success
+SDG    6762    61908    62298    1    Fail
+SDG    6762    62399    62660    -1    Success
+SDG    6762    70261    70826    1    Success
+SDG    6765    44970    45115    1    Fail
+SDG    6780    99252    99409    -1    Fail
+SDG    6783    69947    70110    -1    Fail

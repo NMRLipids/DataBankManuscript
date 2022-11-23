@@ -1,6 +1,6 @@
 # res.; time-begin; time-end; to leaflet; outcome
-CHOL    202    439    599    1    Fail
-CHOL    212    10166    10396    1    Fail
+CHOL    202    439    618    1    Fail
+CHOL    212    10166    10395    1    Fail
 CHOL    220    6503    6612    -1    Success
 CHOL    224    7617    7634    -1    Success
 CHOL    239    11550    12180    1    Fail
@@ -9,10 +9,10 @@ CHOL    269    4662    4882    -1    Fail
 CHOL    269    6505    8103    1    Success
 CHOL    272    6874    7871    1    Success
 CHOL    275    6638    6844    -1    Fail
-CHOL    277    6439    7177    -1    Fail
+CHOL    277    6439    7176    -1    Fail
 CHOL    281    278    296    1    Success
 CHOL    281    676    759    -1    Success
 CHOL    281    11736    11859    1    Success
-CHOL    281    17782    19780    1    Fail
-CHOL    282    2563    3056    -1    Fail
-CHOL    283    16068    16182    1    Fail
+CHOL    281    17782    19798    1    Fail
+CHOL    282    2563    3050    -1    Fail
+CHOL    283    16066    16182    1    Fail

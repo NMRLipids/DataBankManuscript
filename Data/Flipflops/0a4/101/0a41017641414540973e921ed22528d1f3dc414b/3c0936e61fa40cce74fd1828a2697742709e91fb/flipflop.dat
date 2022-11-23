@@ -1,3 +1,6 @@
 # res.; time-begin; time-end; to leaflet; outcome
-DPPC    43    8451    8983    -1    Fail
-DPPC    72    8433    9368    -1    Fail
+DPPC    43    8563    8792    -1    Fail
+DPPC    72    9155    9268    -1    Fail
+DPPC    80    5689    5852    -1    Fail
+DPPC    118    7106    7209    1    Fail
+DPPC    139    1821    1927    1    Fail

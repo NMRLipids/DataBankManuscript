@@ -1,5 +1,4 @@
 # res.; time-begin; time-end; to leaflet; outcome
-CHOL    265    7490    7572    -1    Success
-CHOL    269    7405    7507    1    Fail
-CHOL    274    4125    4175    -1    Success
-CHOL    278    6193    6244    1    Success
+CHOL    265    7490    7573    -1    Success
+CHOL    274    4125    4177    -1    Success
+CHOL    278    6193    6241    1    Success

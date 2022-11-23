@@ -1,21 +1,2 @@
 # res.; time-begin; time-end; to leaflet; outcome
-DSPC    156    1981    2150    1    Fail
-DSPC    156    2336    3440    1    Fail
-DSPC    156    4131    4324    1    Fail
-DSPC    156    4534    4665    1    Fail
-DSPC    156    5018    5128    1    Fail
-DSPC    156    5292    5979    1    Fail
-DSPC    177    1718    1820    1    Fail
-DSPC    177    1954    2116    1    Fail
-DSPC    177    2372    2593    1    Fail
-DSPC    177    2823    3285    1    Fail
-DSPC    177    3490    3687    1    Fail
-DSPC    177    5306    5441    1    Fail
-DSPC    177    5555    6019    1    Fail
-DSPC    182    1991    2149    1    Fail
-DSPC    182    2989    3236    1    Fail
-DSPC    182    5767    5875    1    Fail
-DSPC    212    4006    4118    1    Fail
-DSPC    212    5010    5145    1    Fail
-DSPC    212    5298    5432    1    Fail
-DSPC    469    4005    4121    -1    Fail
+DSPC    177    2614    2734    1    Fail
