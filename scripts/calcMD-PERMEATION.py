@@ -62,6 +62,10 @@ for system in systems:
 
     if 'gromacs' not in system['SOFTWARE']:
         continue
+
+    if 'WARNINGS' in system and 'AMBIGUOUS_ATOMNAMES' in system['WARNINGS']:
+        continue
+
     
     subdir = system['path']
     READMEfilepath = subdir + '/README.yaml'
@@ -123,7 +127,7 @@ for system in systems:
 
     # Reads the phosphate atom name
     for lipid in system['COMPOSITION']:
-        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid) or ('DMTAP' in lipid):
+        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid) or ('DMTAP' in lipid) or ('DOG' in lipid):
             continue
         elif lipid in lipids_dict:
             lipid_mapping_file = '../../Databank/Scripts/BuildDatabank/mapping_files/' + system['COMPOSITION'][lipid]['MAPPING']
