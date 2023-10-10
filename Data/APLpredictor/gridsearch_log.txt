@@ -746,3 +746,1373 @@ RMSE: 4.633
 R2: 0.723
 Pearson: 0.862
 
+---- LinearRegression ----
+
+---- LinearRegression ----
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 10}
+GridSearchCV fit: -3.7898251391858016
+
+Metrics in test set
+MAE: 2.601
+RMSE: 3.790
+R2: 0.766
+Pearson: 0.875
+
+Metrics in training set
+MAE: 3.012
+RMSE: 4.740
+R2: 0.710
+Pearson: 0.849
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': 7, 'max_features': 'auto', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+GridSearchCV fit: -3.888071073508024
+
+Metrics in test set
+MAE: 2.779
+RMSE: 3.888
+R2: 0.753
+Pearson: 0.869
+
+Metrics in training set
+MAE: 2.924
+RMSE: 4.763
+R2: 0.707
+Pearson: 0.853
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.839872773697182
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.026
+RMSE: 4.910
+R2: 0.688
+Pearson: 0.836
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 25}
+GridSearchCV fit: -3.8368754178204045
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.837
+R2: 0.760
+Pearson: 0.872
+
+Metrics in training set
+MAE: 2.854
+RMSE: 4.780
+R2: 0.705
+Pearson: 0.851
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 50}
+GridSearchCV fit: -3.7839595159706922
+
+Metrics in test set
+MAE: 2.638
+RMSE: 3.784
+R2: 0.766
+Pearson: 0.876
+
+Metrics in training set
+MAE: 2.814
+RMSE: 4.490
+R2: 0.739
+Pearson: 0.873
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.01, 'n_estimators': 100}
+GridSearchCV fit: -4.516582071623441
+
+Metrics in test set
+MAE: 3.323
+RMSE: 4.517
+R2: 0.667
+Pearson: 0.817
+
+Metrics in training set
+MAE: 3.115
+RMSE: 4.783
+R2: 0.704
+Pearson: 0.849
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+Best model parameters: {'activation': 'relu', 'alpha': 0.0005, 'hidden_layer_sizes': (50, 50), 'max_iter': 750}
+GridSearchCV fit: -4.521217101782131
+
+Metrics in test set
+MAE: 3.221
+RMSE: 4.521
+R2: 0.666
+Pearson: 0.816
+
+Metrics in training set
+MAE: 2.738
+RMSE: 3.555
+R2: 0.837
+Pearson: 0.915
+
+---- XGBRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 8, 'n_estimators': 50}
+GridSearchCV fit: -3.7466125602245017
+
+Metrics in test set
+MAE: 2.581
+RMSE: 3.747
+R2: 0.771
+Pearson: 0.878
+
+Metrics in training set
+MAE: 2.918
+RMSE: 4.633
+R2: 0.723
+Pearson: 0.862
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.839872773697182
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.026
+RMSE: 4.910
+R2: 0.688
+Pearson: 0.836
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+GridSearchCV fit: -3.833129922607848
+
+Metrics in test set
+MAE: 2.665
+RMSE: 3.833
+R2: 0.760
+Pearson: 0.872
+
+Metrics in training set
+MAE: 2.848
+RMSE: 4.927
+R2: 0.686
+Pearson: 0.841
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 50}
+GridSearchCV fit: -3.7839595159706922
+
+Metrics in test set
+MAE: 2.638
+RMSE: 3.784
+R2: 0.766
+Pearson: 0.876
+
+Metrics in training set
+MAE: 2.808
+RMSE: 4.483
+R2: 0.740
+Pearson: 0.873
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.05, 'n_estimators': 50}
+GridSearchCV fit: -4.443041330707841
+
+Metrics in test set
+MAE: 3.275
+RMSE: 4.443
+R2: 0.678
+Pearson: 0.824
+
+Metrics in training set
+MAE: 3.039
+RMSE: 4.686
+R2: 0.716
+Pearson: 0.857
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+Best model parameters: {'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50), 'max_iter': 750}
+GridSearchCV fit: -4.585777953000006
+
+Metrics in test set
+MAE: 3.310
+RMSE: 4.586
+R2: 0.657
+Pearson: 0.810
+
+Metrics in training set
+MAE: 2.893
+RMSE: 3.704
+R2: 0.823
+Pearson: 0.907
+
+---- XGBRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 8, 'n_estimators': 50}
+GridSearchCV fit: -3.7466125602245017
+
+Metrics in test set
+MAE: 2.581
+RMSE: 3.747
+R2: 0.771
+Pearson: 0.878
+
+Metrics in training set
+MAE: 2.918
+RMSE: 4.633
+R2: 0.723
+Pearson: 0.862
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 50}
+GridSearchCV fit: -3.7839595159706927
+
+Metrics in test set
+MAE: 2.638
+RMSE: 3.784
+R2: 0.766
+Pearson: 0.876
+
+Metrics in training set
+MAE: 2.812
+RMSE: 4.494
+R2: 0.739
+Pearson: 0.872
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'n_estimators': 50}
+GridSearchCV fit: -4.392212443995814
+
+Metrics in test set
+MAE: 3.241
+RMSE: 4.392
+R2: 0.685
+Pearson: 0.828
+
+Metrics in training set
+MAE: 3.084
+RMSE: 4.703
+R2: 0.714
+Pearson: 0.857
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+Best model parameters: {'activation': 'relu', 'alpha': 0.0005, 'hidden_layer_sizes': (50, 50), 'max_iter': 750}
+GridSearchCV fit: -4.4918264287843535
+
+Metrics in test set
+MAE: 3.186
+RMSE: 4.492
+R2: 0.671
+Pearson: 0.819
+
+Metrics in training set
+MAE: 2.653
+RMSE: 3.486
+R2: 0.843
+Pearson: 0.918
+
+---- XGBRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 8, 'n_estimators': 50}
+GridSearchCV fit: -3.7466125602245017
+
+Metrics in test set
+MAE: 2.581
+RMSE: 3.747
+R2: 0.771
+Pearson: 0.878
+
+Metrics in training set
+MAE: 2.918
+RMSE: 4.633
+R2: 0.723
+Pearson: 0.862
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 10}
+GridSearchCV fit: -3.7898251391858016
+
+Metrics in test set
+MAE: 2.601
+RMSE: 3.790
+R2: 0.766
+Pearson: 0.875
+
+Metrics in training set
+MAE: 3.009
+RMSE: 4.739
+R2: 0.710
+Pearson: 0.849
+
+---- RandomForestRegressor ----
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.8398727736971816
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.026
+RMSE: 4.910
+R2: 0.688
+Pearson: 0.836
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 50}
+GridSearchCV fit: -3.833846640405758
+
+Metrics in test set
+MAE: 2.676
+RMSE: 3.834
+R2: 0.760
+Pearson: 0.872
+
+Metrics in training set
+MAE: 2.848
+RMSE: 4.732
+R2: 0.711
+Pearson: 0.856
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.839872773697182
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.023
+RMSE: 4.909
+R2: 0.689
+Pearson: 0.836
+
+---- RandomForestRegressor ----
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 10}
+GridSearchCV fit: -3.7898251391858016
+
+Metrics in test set
+MAE: 2.601
+RMSE: 3.790
+R2: 0.766
+Pearson: 0.875
+
+Metrics in training set
+MAE: 3.012
+RMSE: 4.740
+R2: 0.710
+Pearson: 0.849
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+GridSearchCV fit: -3.8014613585139005
+
+Metrics in test set
+MAE: 2.654
+RMSE: 3.801
+R2: 0.764
+Pearson: 0.875
+
+Metrics in training set
+MAE: 2.835
+RMSE: 4.858
+R2: 0.695
+Pearson: 0.847
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.839872773697182
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.006
+RMSE: 4.790
+R2: 0.704
+Pearson: 0.845
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+GridSearchCV fit: -3.810117865253906
+
+Metrics in test set
+MAE: 2.655
+RMSE: 3.810
+R2: 0.763
+Pearson: 0.874
+
+Metrics in training set
+MAE: 2.858
+RMSE: 4.862
+R2: 0.695
+Pearson: 0.846
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 75}
+GridSearchCV fit: -3.759779220340636
+
+Metrics in test set
+MAE: 2.593
+RMSE: 3.760
+R2: 0.769
+Pearson: 0.877
+
+Metrics in training set
+MAE: 2.788
+RMSE: 4.446
+R2: 0.745
+Pearson: 0.874
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.5, 'n_estimators': 100}
+GridSearchCV fit: -4.466442673002438
+
+Metrics in test set
+MAE: 3.292
+RMSE: 4.466
+R2: 0.674
+Pearson: 0.823
+
+Metrics in training set
+MAE: 3.042
+RMSE: 4.727
+R2: 0.711
+Pearson: 0.860
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 50}
+GridSearchCV fit: -3.7839595159706922
+
+Metrics in test set
+MAE: 2.638
+RMSE: 3.784
+R2: 0.766
+Pearson: 0.876
+
+Metrics in training set
+MAE: 2.805
+RMSE: 4.458
+R2: 0.743
+Pearson: 0.874
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'n_estimators': 100}
+GridSearchCV fit: -4.361529004683917
+
+Metrics in test set
+MAE: 3.218
+RMSE: 4.362
+R2: 0.690
+Pearson: 0.831
+
+Metrics in training set
+MAE: 3.074
+RMSE: 4.747
+R2: 0.709
+Pearson: 0.854
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+Best model parameters: {'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50), 'max_iter': 750}
+GridSearchCV fit: -4.6167181505249095
+
+Metrics in test set
+MAE: 3.362
+RMSE: 4.617
+R2: 0.652
+Pearson: 0.809
+
+Metrics in training set
+MAE: 3.007
+RMSE: 3.903
+R2: 0.803
+Pearson: 0.903
+
+---- XGBRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 8, 'n_estimators': 50}
+GridSearchCV fit: -3.7466125602245017
+
+Metrics in test set
+MAE: 2.581
+RMSE: 3.747
+R2: 0.771
+Pearson: 0.878
+
+Metrics in training set
+MAE: 2.918
+RMSE: 4.633
+R2: 0.723
+Pearson: 0.862
+
+---- LinearRegression ----
+
+Best model parameters: {}
+GridSearchCV fit: -4.673054513199252
+
+Metrics in test set
+MAE: 3.395
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.940
+RMSE: 3.743
+R2: 0.819
+Pearson: 0.905
+
+---- Lasso ----
+
+Best model parameters: {'alpha': 0.001}
+GridSearchCV fit: -4.673851754917777
+
+Metrics in test set
+MAE: 3.397
+RMSE: 4.674
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- Ridge ----
+
+Best model parameters: {'alpha': 0.01}
+GridSearchCV fit: -4.6732333376506965
+
+Metrics in test set
+MAE: 3.396
+RMSE: 4.673
+R2: 0.644
+Pearson: 0.802
+
+Metrics in training set
+MAE: 2.948
+RMSE: 3.745
+R2: 0.819
+Pearson: 0.905
+
+---- ElasticNet ----
+
+Best model parameters: {'alpha': 0.05, 'l1_ratio': 0.9}
+GridSearchCV fit: -5.36241111391284
+
+Metrics in test set
+MAE: 4.036
+RMSE: 5.362
+R2: 0.531
+Pearson: 0.758
+
+Metrics in training set
+MAE: 3.825
+RMSE: 6.789
+R2: 0.404
+Pearson: 0.669
+
+---- DecisionTreeRegressor ----
+
+Best model parameters: {'max_depth': 8}
+GridSearchCV fit: -3.839872773697182
+
+Metrics in test set
+MAE: 2.667
+RMSE: 3.840
+R2: 0.759
+Pearson: 0.871
+
+Metrics in training set
+MAE: 3.026
+RMSE: 4.910
+R2: 0.688
+Pearson: 0.836
+
+---- RandomForestRegressor ----
+
+Best model parameters: {'max_depth': None, 'max_features': 1, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 25}
+GridSearchCV fit: -3.8753954880899664
+
+Metrics in test set
+MAE: 2.741
+RMSE: 3.875
+R2: 0.755
+Pearson: 0.870
+
+Metrics in training set
+MAE: 2.954
+RMSE: 5.266
+R2: 0.642
+Pearson: 0.813
+
+---- GradientBoostingRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 75}
+GridSearchCV fit: -3.759779220340636
+
+Metrics in test set
+MAE: 2.593
+RMSE: 3.760
+R2: 0.769
+Pearson: 0.877
+
+Metrics in training set
+MAE: 2.784
+RMSE: 4.432
+R2: 0.746
+Pearson: 0.875
+
+---- AdaBoostRegressor ----
+
+Best model parameters: {'learning_rate': 0.5, 'n_estimators': 200}
+GridSearchCV fit: -4.360575383937027
+
+Metrics in test set
+MAE: 3.234
+RMSE: 4.361
+R2: 0.690
+Pearson: 0.832
+
+Metrics in training set
+MAE: 3.086
+RMSE: 4.682
+R2: 0.717
+Pearson: 0.860
+
+---- KNeighborsRegressor ----
+
+Best model parameters: {'n_neighbors': 10}
+GridSearchCV fit: -4.640041949298464
+
+Metrics in test set
+MAE: 3.142
+RMSE: 4.640
+R2: 0.649
+Pearson: 0.805
+
+Metrics in training set
+MAE: 3.218
+RMSE: 6.308
+R2: 0.486
+Pearson: 0.700
+
+---- MLPRegressor ----
+
+Best model parameters: {'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50), 'max_iter': 750}
+GridSearchCV fit: -4.664373690895736
+
+Metrics in test set
+MAE: 3.361
+RMSE: 4.664
+R2: 0.645
+Pearson: 0.805
+
+Metrics in training set
+MAE: 2.984
+RMSE: 3.806
+R2: 0.813
+Pearson: 0.903
+
+---- XGBRegressor ----
+
+Best model parameters: {'learning_rate': 0.1, 'max_depth': 8, 'n_estimators': 50}
+GridSearchCV fit: -3.7466125602245017
+
+Metrics in test set
+MAE: 2.581
+RMSE: 3.747
+R2: 0.771
+Pearson: 0.878
+
+Metrics in training set
+MAE: 2.918
+RMSE: 4.633
+R2: 0.723
+Pearson: 0.862
+
