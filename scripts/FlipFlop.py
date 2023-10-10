@@ -20,30 +20,20 @@ from lipyphilic.lib.assign_leaflets import AssignLeaflets
 from lipyphilic.lib.flip_flop import FlipFlop 
 
 sys.path.insert(1, '../../Databank/Scripts/BuildDatabank/')
-from databankLibrary import download_link, lipids_dict, databank
+from databankLibrary import * # download_link, lipids_dict, databank
 
 
-
-def loadMappingFile(path_to_mapping_file):    # load mapping file into a dictionary
-    mapping_dict = {}
-    with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+path_to_mapping_file, "r") as yaml_file:
-        mapping_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
-    yaml_file.close()
-    
-    return mapping_dict
-
-
-def getLipids(readme):
-        lipids = []
-        for key in lipids_dict.keys():
-            try:
-                if key in readme['COMPOSITION'].keys():                
-       #         if readme['N'+key] != [0,0]: 
-                    lipids.append(key)
-            except KeyError:
-                continue
-
-        return lipids
+#def getLipids(readme):
+#        lipids = []
+#        for key in lipids_dict.keys():
+#            try:
+#                if key in readme['COMPOSITION'].keys():                
+#       #         if readme['N'+key] != [0,0]: 
+#                    lipids.append(key)
+#            except KeyError:
+#                continue
+#
+#        return lipids
 
 def selectLipids(readme):
     lipids = 'resname '
@@ -55,21 +45,13 @@ def selectLipids(readme):
             return lipids
 
 
-def getAtoms(readme, lipid):
-    atoms = ""
-    path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
-    mapping_dict = loadMappingFile(path_to_mapping_file)
-    for key in mapping_dict:
-        atoms = atoms + ' ' + mapping_dict[key]['ATOMNAME']
-  
-    return atoms
 
-def headgroupAtom(readme, lipid):
-    path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
-    mapping_dict = loadMappingFile(path_to_mapping_file)
-    for key in mapping_dict:
-        if mapping_dict[key]['FRAGMENT'] == 'headgroup': 
-            return mapping_dict[key]['ATOMNAME']
+#def headgroupAtom(readme, lipid):
+#    path_to_mapping_file = readme['COMPOSITION'][lipid]['MAPPING']
+#    mapping_dict = loadMappingFile(path_to_mapping_file)
+#    for key in mapping_dict:
+#        if mapping_dict[key]['FRAGMENT'] == 'headgroup': 
+#            return mapping_dict[key]['ATOMNAME']
 
 def headgroupAtoms(readme,lipid):
     mapping_file = loadMappingFile(readme['COMPOSITION'][lipid]['MAPPING'])
@@ -142,13 +124,15 @@ def centerxtcfile(system, system_path):
 
 
 print("Loading README files")
-path = '../../Databank/Data/Simulations/'
-db_data = databank(path)      #searches through every subfolder of a path and finds every trajectory in databank
-systems = db_data.get_systems()
+path = '../../Databank/'
+#db_data = databank(path)      #searches through every subfolder of a path and finds every trajectory in databank
+#systems = db_data.get_systems()
+systems = initialize_databank(path)
 
 for system in systems:   #checks everysystem for flipflop
     #directories
     indexingPath = "/".join(system['path'].split("/")[5:9])
+    indexingPath = system['path']
     subdir = f'../../Databank/Data/Simulations/{indexingPath}/'
     DATAdir = f'../Data/Flipflops/{indexingPath}/'
     flipflop_file = f'{DATAdir}flipflop.dat'
@@ -165,6 +149,7 @@ for system in systems:   #checks everysystem for flipflop
         continue
         
     #exception skiping
+    #print(system)
     if system['SOFTWARE'] == 'openMM':
         print('OpenMM')
         continue

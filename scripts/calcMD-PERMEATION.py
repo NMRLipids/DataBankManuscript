@@ -13,7 +13,7 @@ import MDAnalysis as mda
 #from MDAnalysis.analysis.waterdynamics import MeanSquareDisplacement as MSD
 
 sys.path.insert(1, '../../Databank/Scripts/BuildDatabank/')
-from databankLibrary import download_link, read_mapping_file, read_mapping_file_res, read_mapping_filePAIR, make_positive_angles, lipids_dict, molecules_dict, databank
+from databankLibrary import * # download_link, read_mapping_file, read_mapping_file_res, read_mapping_filePAIR, make_positive_angles, lipids_dict, molecules_dict, databank
 
 path = '../../Databank/Data/Simulations/'
 db_data = databank(path)
@@ -24,34 +24,6 @@ for key in lipids_dict:
     molecules.append(key)
 for key in molecules_dict:
     molecules.append(key)
-
-
-def getLipids(readme, molecules=lipids_dict.keys()):
-    lipids = 'resname '
-
-    for key in readme['COMPOSITION'].keys():
-        if key in molecules:
-            m_file = readme['COMPOSITION'][key]['MAPPING']
-            with open('../../Databank/Scripts/BuildDatabank/mapping_files/'+m_file,"r") as yaml_file:
-                mapping_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
-                #for line in f:
-                #    if len(line.split()) > 2 and "Individual atoms" not in line:
-            for atom in mapping_dict:
-                print(mapping_dict[atom])
-                try:
-                    #        if line.split()[2] not in lipids:
-                    lipids = lipids + mapping_dict[atom]['RESIDUE'] + ' or resname '
-                except:
-                    lipids = lipids + readme['COMPOSITION'][key]['NAME'] + ' or resname '
-                    break
-                    #continue
-                    #else:
-
-                 
-    lipids = lipids[:-12]
-    print(lipids)
-    return lipids
-
 
 
 cwd = os.getcwd()
@@ -66,8 +38,10 @@ for system in systems:
     if 'WARNINGS' in system and 'AMBIGUOUS_ATOMNAMES' in system['WARNINGS']:
         continue
 
+    if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
+        continue
     
-    subdir = system['path']
+    subdir = '../../Databank/Data/Simulations/' + system['path']
     READMEfilepath = subdir + '/README.yaml'
     doi = system['DOI']
     trj = system.get('TRJ')
@@ -87,6 +61,7 @@ for system in systems:
     #outfilename = str(densityFOLDERS) + '/WATERlateralMSD.xvg'
 
     CheckOutPutFile = outputFOLDERS + '/Counting_events.txt'
+    print(CheckOutPutFile)
     if os.path.isfile(CheckOutPutFile): # and os.path.getsize(CheckOutPutFile) > 0:
         print('Result already found')
         continue
