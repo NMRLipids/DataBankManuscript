@@ -35,12 +35,19 @@ for system in systems:
     if 'gromacs' not in system['SOFTWARE']:
         continue
 
-    if 'WARNINGS' in system and 'AMBIGUOUS_ATOMNAMES' in system['WARNINGS']:
-        continue
+    try:
+        if 'WARNINGS' in system and 'AMBIGUOUS_ATOMNAMES' in system['WARNINGS']:
+            continue
 
-    if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
-        continue
-    
+        if 'WARNINGS' in system and 'ORIENTATION' in system['WARNINGS']:
+            continue
+
+        if 'WARNINGS' in system and 'GROMACS_VERSION' in system['WARNINGS'] and system['WARNINGS']['GROMACS_VERSION'] == 'gromacs3':
+            continue
+    except:
+        pass
+
+        
     subdir = '../../Databank/Data/Simulations/' + system['path']
     READMEfilepath = subdir + '/README.yaml'
     doi = system['DOI']
@@ -93,8 +100,8 @@ for system in systems:
     # Note that this leaves out the equilibration time
     xtcwhole=subdir + '/centered.xtc'
     if (not os.path.isfile(xtcwhole)):
-        continue
-        #os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
+        #continue
+        os.system('echo System | gmx trjconv -f ' + trj_name + ' -s ' + tpr_name + ' -o ' + xtcwhole + ' -pbc mol -b ' + str(EQtime))
                         
     # Reads the name of water oxygen atom using the information in mapping file and README.yaml 
     water_mapping_file = '../../Databank/Scripts/BuildDatabank/mapping_files/' + system['COMPOSITION']['SOL']['MAPPING']
@@ -102,7 +109,7 @@ for system in systems:
 
     # Reads the phosphate atom name
     for lipid in system['COMPOSITION']:
-        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid) or ('DMTAP' in lipid) or ('DOG' in lipid):
+        if ('CHOL' in lipid) or ('CER' in lipid) or ('DHMDMAB' in lipid) or ('DMTAP' in lipid) or ('DOG' in lipid) or ('TOCL' in lipid) or ('GB3' in lipid) or ('GM1' in lipid) or ('TLCL_0H' in lipid):
             continue
         elif lipid in lipids_dict:
             lipid_mapping_file = '../../Databank/Scripts/BuildDatabank/mapping_files/' + system['COMPOSITION'][lipid]['MAPPING']
